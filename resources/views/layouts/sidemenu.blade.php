@@ -5,21 +5,27 @@
 </div>
 <div class="sidebar-wrapper">
     <ul class="nav">
-        <li>
+        <li @if(Route::currentRouteName() == 'home') class="active" @endif>
             <a href="{{ route('home') }}">
-                <i class="material-icons">dashboard</i>
+                <i class="fa fa-home fa-fw"></i>
                 <p>Dashboard</p>
             </a>
         </li>
         <li @if(Route::currentRouteName() == 'barang') class="active" @endif>
             <a href="{{ route('barang', ['kategori' => 'Semua_kategori', 'perhalaman' => 10]) }}">
-                <i class="material-icons">content_paste</i>
+                <i class="fa fa-list fa-fw"></i>
                 <p>Barang</p>
             </a>
         </li>
         <li>
             <a href="">
-                <i class="material-icons">attach_money</i>
+                <i class="fa fa-cart-plus fa-fw"></i>
+                <p>Pesanan</p>
+            </a>
+        </li>
+        <li>
+            <a href="">
+                <i class="fa fa-handshake-o fa-fw"></i>
                 <p>Transaksi</p>
             </a>
         </li>

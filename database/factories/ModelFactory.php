@@ -30,6 +30,6 @@ $factory->define(App\Barang::class, function (Faker\Generator $faker) {
         'nama' => $faker->text(25),
         'keterangan' => $faker->text(100),
         'harga' => rand(10000, 1000000),
-        'stok' => rand(10, 200)
+        'stok' => rand(0, 200)
     ];
 });

@@ -6,6 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class Pesanan extends Model
 {
+    const STATUS = [
+        'memesan',
+        'mengirim',
+        'terkirim'
+    ];
+
     protected $table = 'pesanan';
 
     protected $fillable = [

@@ -7,14 +7,13 @@
     <title>Adiguna</title>
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport'/>
     <meta name="viewport" content="width=device-width"/>
-    <link href="{{ asset('assets/css/bootstrap.min.css') }} " rel="stylesheet"/>
-    <link href="{{asset('assets/css/animate.min.css')}}" rel="stylesheet"/>
-    <link href="{{asset('assets/css/light-bootstrap-dashboard.css')}}" rel="stylesheet"/>
-    <link href="{{asset('assets/css/demo.css')}}" rel="stylesheet"/>
-    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
-    <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300' rel='stylesheet' type='text/css'>
-    <link href="{{asset('assets/css/pe-icon-7-stroke.css')}}" rel="stylesheet"/>
-    <link href="{{asset('assets/css/main.css')}}" rel="stylesheet"/>
+
+    <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet" />
+    <link href="{{ asset('css/material-dashboard.css') }}" rel="stylesheet" />
+    <link href="{{ asset('css/dataTables.bootstrap.css') }}" rel="stylesheet"/>
+    <link href="{{ asset('css/dataTables.responsive.css') }}" rel="stylesheet"/>
+    <link href="{{ asset('css/font-awesome.min.css') }}" rel="stylesheet"/>
+    <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300|Material+Icons' rel='stylesheet' type='text/css'>
 </head>
 <body>
 <div class="container">
@@ -75,4 +74,12 @@
     <div class="col-lg-4 col-md-3 col-sm-2"></div>
 </div>
 </body>
+<script src="{{ asset('js/jquery-3.2.1.min.js') }}" type="text/javascript"></script>
+<script src="{{ asset('js/bootstrap.min.js') }}" type="text/javascript"></script>
+<script src="{{ asset('js/material.min.js') }}" type="text/javascript"></script>
+<script src="{{ asset('js/chartist.min.js') }}"></script>
+<script src="{{ asset('js/arrive.min.js') }}"></script>
+<script src="{{ asset('js/perfect-scrollbar.jquery.min.js') }}"></script>
+<script src="{{ asset('js/bootstrap-notify.js') }}"></script>
+<script src="{{ asset('js/material-dashboard.js?v=1.2.0') }}"></script>
 </html>
