@@ -15,6 +15,7 @@ class UserSeeder extends Seeder
         User::create([
             'name' => 'Rafy Aulia Akbar',
             'email' => 'rafyakbar@mhs.unesa.ac.id',
+            'nohp' => '087789891729',
             'password' => bcrypt('secret'),
             'hak_akses' => 'pemilik'
         ]);
@@ -22,6 +23,7 @@ class UserSeeder extends Seeder
         User::create([
             'name' => 'Ulin Nuha',
             'email' => 'ulinnuha@mhs.unesa.ac.id',
+            'nohp' => '085812051570',
             'password' => bcrypt('secret'),
             'hak_akses' => 'pemilik'
         ]);
@@ -29,6 +31,7 @@ class UserSeeder extends Seeder
         User::create([
             'name' => 'Pegawai Pertama',
             'email' => 'pegawai1@email.com',
+            'nohp' => '081234568900',
             'password' => bcrypt('secret'),
             'hak_akses' => 'pegawai'
         ]);
@@ -36,6 +39,7 @@ class UserSeeder extends Seeder
         User::create([
             'name' => 'Pegawai Kedua',
             'email' => 'pegawai2@email.com',
+            'nohp' => '081234568901',
             'password' => bcrypt('secret'),
             'hak_akses' => 'pegawai'
         ]);

@@ -120,7 +120,7 @@
                 </thead>
                 <tbody>
                 @foreach($barang as $item)
-                    <tr>
+                    <tr @if($item->stok < 10) class="danger" @endif>
                         <td class="text-center">{{ ($barang->currentpage() * $barang->perpage()) + (++$no) - $barang->perpage() }}</td>
                         <td>{{ $item->kode }}</td>
                         <td>{{ $item->nama }}</td>

@@ -18,15 +18,17 @@ class UserController extends Controller
     {
         $this->validate($request, [
             'nama' => 'required',
+            'nohp' => 'required|number',
             'email' => 'required'
         ]);
 
         Auth::user()->update([
             'name' => $request->nama,
+            'nohp' => $request->nohp,
             'email' => $request->email
         ]);
 
-        return back()->with('message', 'Profil berhasil diganti');
+        return back()->with('message', 'Profil berhasil diganti!');
     }
 
     public function ubahPassword(Request $request)

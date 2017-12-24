@@ -15,7 +15,7 @@ class Pesanan extends Model
     protected $table = 'pesanan';
 
     protected $fillable = [
-        'id', 'user_id', 'nama_pelanggan', 'alamat_pelanggan', 'created_at', 'updates_at'
+        'id', 'user_id', 'nama_pelanggan', 'nohp_pelanggan', 'email_pelanggan', 'alamat_pelanggan', 'created_at', 'updates_at'
     ];
 
     public function barang()
