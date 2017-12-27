@@ -17,16 +17,16 @@
                 <p>Barang</p>
             </a>
         </li>
-        <li>
-            <a href="">
+        <li @if(Route::currentRouteName() == 'pesanan') class="active" @endif>
+            <a href="{{ route('pesanan') }}">
                 <i class="fa fa-cart-plus fa-fw"></i>
-                <p>Pesanan</p>
+                <p>Tambah Pesanan</p>
             </a>
         </li>
-        <li>
-            <a href="">
+        <li @if(Route::currentRouteName() == 'daftarpesanan') class="active" @endif>
+            <a href="{{ route('daftarpesanan', ['status' => 'Semua_status', 'perhalaman' => 10]) }}">
                 <i class="fa fa-handshake-o fa-fw"></i>
-                <p>Transaksi</p>
+                <p>Daftar Pesanan</p>
             </a>
         </li>
     </ul>

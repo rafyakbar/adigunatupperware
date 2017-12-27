@@ -19,6 +19,6 @@ class Barang extends Model
 
     public function pesanan()
     {
-        return $this->belongsToMany('App\Pesanan', 'pesanan_barang', 'barang_id', 'pesanan_id')->withPivot('jumlah');
+        return $this->belongsToMany('App\Pesanan', 'pesanan_barang', 'barang_id', 'pesanan_id')->withPivot('harga_sekarang')->withPivot('jumlah');
     }
 }

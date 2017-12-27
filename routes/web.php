@@ -32,6 +32,12 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('barang/{kategori}/{perhalaman}', 'BarangController@tampilDaftarBarang')->name('barang');
 
+    Route::get('pesanan', 'PesananController@tampilForm')->name('pesanan');
+
+    Route::get('daftar/pesanan/{status}/{perhalaman}', 'PesananController@tampilDaftar')->name('daftarpesanan');
+
+    Route::get('autocomplete/barang', 'BarangController@autocomplete')->name('acbarang');
+
     Route::group(['prefix' => 'edit'], function () {
 
         Route::post('password', [
@@ -65,6 +71,11 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('barang', [
             'uses' => 'BarangController@tambah',
             'as' => 'tambah.barang'
+        ]);
+
+        Route::post('pesanan', [
+            'uses' => 'PesananController@tambah',
+            'as' => 'tambah.pesanan'
         ]);
 
     });

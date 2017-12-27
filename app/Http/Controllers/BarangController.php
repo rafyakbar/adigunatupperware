@@ -10,6 +10,15 @@ use Illuminate\Support\Facades\Input;
 
 class BarangController extends Controller
 {
+    public function autocomplete(Request $request)
+    {
+        if ($request->has('q')){
+            $keyword = $request->q;
+            $result = Barang::where('stok','>',0)->whereRaw('("kode" LIKE \'%'.$keyword.'%\' OR "nama" ILIKE \'%'.$keyword.'%\')')->get();
+            return response()->json($result);
+        }
+    }
+    
     public function tampilDaftarBarang(Request $request)
     {
         $jumlah = $request->perhalaman;
@@ -45,10 +54,10 @@ class BarangController extends Controller
     public function ubahBarang(Request $request)
     {
         $this->validate($request, [
-            'kode' => 'required|number',
+            'kode' => 'required|numeric',
             'nama' => 'required',
-            'harga' => 'required|number',
-            'stok' => 'required|number',
+            'harga' => 'required|numeric',
+            'stok' => 'required|numeric',
             'kategori_id' => 'required'
         ]);
 
@@ -67,10 +76,10 @@ class BarangController extends Controller
     public function tambah(Request $request)
     {
         $this->validate($request, [
-            'kode' => 'required|number',
+            'kode' => 'required|numeric',
             'nama' => 'required',
-            'harga' => 'required|number',
-            'stok' => 'required|number',
+            'harga' => 'required|numeric',
+            'stok' => 'required|numeric',
             'kategori_id' => 'required'
         ]);
 

@@ -21,6 +21,7 @@ class PesananTable extends Migration
             $table->string('nohp_pelanggan');
             $table->string('email_pelanggan')->nullable();
             $table->string('alamat_pelanggan');
+            $table->string('status');
             $table->timestamps();
         });
     }

@@ -1,6 +1,13 @@
 @extends('layouts.admin')
 
 @section('konten')
+    {{--alert--}}
+    @if(session()->has('message'))
+        <div class="alert alert-info">
+            {{ session()->get('message') }}
+        </div>
+    @endif
+
     <div class="btn-group">
         {{--kategori barang--}}
         <div class="btn-group">
@@ -28,11 +35,11 @@
             <ul class="dropdown-menu">
                 @for($c = 10; $c <= $barang->total(); $c += 10)
                     <li>
-                        <a href="{{ route('barang', ['kategori' => str_replace(' ', '_', $kategori), 'perpage' => $c]) }}">{{ $c }}
+                        <a href="{{ route('barang', ['kategori' => str_replace(' ', '_', $kategori), 'perhalaman' => $c]) }}">{{ $c }}
                             per halaman</a></li>
                 @endfor
                 <li>
-                    <a href="{{ route('barang', ['kategori' => str_replace(' ', '_', $kategori), 'perpage' => $barang->total()]) }}">Semua
+                    <a href="{{ route('barang', ['kategori' => str_replace(' ', '_', $kategori), 'perhalaman' => $barang->total()]) }}">Semua
                         barang</a></li>
             </ul>
         </div>
@@ -40,13 +47,6 @@
         {{--tambah barang--}}
         <button class="btn btn-success" type="button" data-toggle="modal" data-target="#tambah">Tambah barang</button>
     </div>
-
-    {{--alert--}}
-    @if(session()->has('message'))
-        <div class="alert alert-info">
-            {{ session()->get('message') }}
-        </div>
-    @endif
 
     {{--tambah barang--}}
     <div id="tambah" class="modal fade" role="dialog" style="background-color: rgba(0, 0, 0, 0.5);">
@@ -107,7 +107,7 @@
             <p class="category">Terdapat <b>{{ $barang->total() }} barang</b> yang sesuai filter</p>
         </div>
         <div class="card-content table-responsive">
-            <table class="table use-datatable">
+            <table class="table datatable-barang">
                 <thead>
                 <tr>
                     <th class="text-center"><i class="fa fa-arrows-v fa-fw"></i>No</th>
