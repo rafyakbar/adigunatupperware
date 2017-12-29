@@ -4,7 +4,7 @@
     {{--alert--}}
     @if(session()->has('message'))
         <div class="alert alert-info">
-            {{ session()->get('message') }}
+            {!! session()->get('message') !!}
         </div>
     @endif
 

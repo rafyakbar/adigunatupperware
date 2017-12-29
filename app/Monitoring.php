@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Monitoring extends Model
 {
-    protected $table = 'tabel';
+    protected $table = 'monitoring';
 
     protected $fillable = [
         'id', 'nama', 'keterangan', 'created_at', 'updated_at'

@@ -1,6 +1,10 @@
 @extends('layouts.admin')
 
 @section('konten')
+    <div class="alert alert-warning">
+        Isi semua data dengan benar dan pastikan stok mencukupi!<br>
+        Karena pesanan yang telah disimpan tidak akan bisa diedit namun dapat dibatalkan.
+    </div>
     <div class="card">
         <form action="{{ route('tambah.pesanan') }}" method="post">
             {{ csrf_field() }}
@@ -36,12 +40,25 @@
                     </div>
                     <div class="col-md-7">
                         <div class="card">
-                            <div class="card-header" data-background-color="orange">
+                            <div class="card-header" data-background-color="green">
                                 <h4 class="title">Barang</h4>
                                 <p class="category">Tambahkan barang yang akan dibeli!</p>
                             </div>
                             <div class="card-content">
-                                <button type="button" onclick="tambah()" class="btn btn-primary">Tambah barang</button>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <button type="button" onclick="tambah()" class="btn btn-primary">Tambah barang
+                                        </button>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <select name="status" class="form-control" style="margin-top: -3%">
+                                            <option value="Lunas">Pilih status pesanan (default : lunas)</option>
+                                            @foreach(\App\Pesanan::STATUS as $value)
+                                                <option value="{{ $value }}">{{ $value }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
                                 <table class="table" id="list-barang">
                                     <thead>
                                     <tr>

@@ -62,7 +62,7 @@
                             {{ csrf_field() }}
                             <div class="form-group label-floating">
                                 <label>Kode</label>
-                                <input class="form-control" type="number" name="kode" required>
+                                <input class="form-control" type="text" name="kode" required>
                             </div>
                             <div class="form-group label-floating">
                                 <label>Nama</label>
@@ -125,7 +125,6 @@
                         <td>{{ $item->kode }}</td>
                         <td>{{ $item->nama }}</td>
                         <td>{{ $item->kategori()->nama }}</td>
-                        {{--<td>Rp {{ number_format($item->harga, 0, ',', '.') }}</td>--}}
                         <td>{{ $item->stok }}</td>
                         <td>
                             <div class="btn-group">

@@ -33,12 +33,14 @@ class PesananController extends Controller
 
     public function tambah(Request $request)
     {
+        $message = "Pesanan berhasil ditambahkan!<br>";
         $pesanan = Pesanan::create([
             'user_id' => Auth::user()->id,
             'nama_pelanggan' => $request->nama_pelanggan,
             'nohp_pelanggan' => $request->nohp_pelanggan,
             'email_pelanggan' => $request->email_pelanggan,
-            'alamat_pelanggan' => $request->alamat_pelanggan
+            'alamat_pelanggan' => $request->alamat_pelanggan,
+            'status' => $request->status
         ]);
         $counter = 0;
         foreach ($request->kode as $item){
@@ -52,7 +54,11 @@ class PesananController extends Controller
                     'stok' => $barang->stok - $request->jumlah[$counter]
                 ]);
             }
+            else{
+                $message = $message."Stok ".$barang->nama." tidak mencukupi! (stok : ".$barang->stok.", permintaan : ".$request->jumlah[$counter].")<br>";
+            }
             $counter++;
         }
+        return redirect('daftar/pesanan/Semua_status/10')->with('message', rtrim($message, '<br>'));
     }
 }
