@@ -34,6 +34,8 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('pesanan', 'PesananController@tampilForm')->name('pesanan');
 
+    Route::get('pesanan/detail/{id}', 'PesananController@tampilDetail')->name('detailpesanan');
+
     Route::get('daftar/pesanan/{status}/{perhalaman}', 'PesananController@tampilDaftar')->name('daftarpesanan');
 
     Route::get('autocomplete/barang', 'BarangController@autocomplete')->name('acbarang');

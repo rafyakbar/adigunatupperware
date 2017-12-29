@@ -72,7 +72,7 @@
                         <td>{{ $item->created_at }}</td>
                         <td>
                             <div class="btn-group">
-                                <a href="" class="btn btn-info btn-sm">Detail/Edit</a>
+                                <a href="{{ route('detailpesanan', ['id' => $item->id]) }}" class="btn btn-info btn-sm">Detail</a>
                                 <button class="btn btn-danger btn-sm" onclick="if (confirm('Apakah anda yakin ingin menghapus {{ $item->nama }}?')){ event.preventDefault();document.getElementById('hapus-{{ $item->id }}').submit();}">
                                     Hapus
                                 </button>

@@ -14,6 +14,13 @@ class PesananController extends Controller
         return view('tambahpesanan');
     }
 
+    public function tampilDetail(Request $request)
+    {
+        return view('detailpesanan', [
+            'pesanan' => Pesanan::find($request->id)
+        ]);
+    }
+
     public function tampilDaftar(Request $request)
     {
         $request->status = str_replace('_', ' ', $request->status);

@@ -71,11 +71,20 @@
             ]
         });
     });
+    $(document).ready(function() {
+        $('.datatable-detailpesanan').DataTable({
+            responsive: true,
+            "info":     false,
+            "lengthMenu": [[5, 10, 20, 40, 80, 100, -1], [5, 10, 20, 40, 80, 100, "Semua barang"]],
+            "columnDefs" : [
+                { "orderable": false, "targets": 3},
+                { "orderable": false, "targets": 4},
+                { "orderable": false, "targets": 5}
+            ]
+        });
+    });
 </script>
 <script type="text/javascript">
-
-    var daftarStokKode = []
-
     function autoComplete() {
         $('.kode').select2({
             placeholder: 'Cari berdasarkan kode/nama barang...',
