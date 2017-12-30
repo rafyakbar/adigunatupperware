@@ -16,6 +16,7 @@ class MonitoringTable extends Migration
         Schema::create('monitoring', function (Blueprint $table){
             $table->bigIncrements('id');
             $table->integer('user_id')->unsigned()->nullable();
+            $table->string('menu');
             $table->text('keterangan');
             $table->timestamps();
         });

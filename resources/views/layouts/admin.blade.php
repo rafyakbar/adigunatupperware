@@ -74,6 +74,16 @@
         });
     });
     $(document).ready(function () {
+        $('.datatable-monitoring').DataTable({
+            responsive: true,
+            "paging": false,
+            "info": false,
+            "columnDefs": [
+                {"orderable": false, "targets": 3}
+            ]
+        });
+    });
+    $(document).ready(function () {
         $('.datatable-daftarpesanan').DataTable({
             responsive: true,
             "paging": false,

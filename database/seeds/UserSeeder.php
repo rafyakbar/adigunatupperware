@@ -29,9 +29,9 @@ class UserSeeder extends Seeder
         ]);
 
         User::create([
-            'name' => 'Iin Adiguna',
+            'name' => 'Siti Zaenab',
             'email' => 'iin.adiguna@yahoo.com',
-            'nohp' => '081234568900',
+            'nohp' => '087854484899',
             'password' => bcrypt('secret'),
             'hak_akses' => 'pemilik'
         ]);

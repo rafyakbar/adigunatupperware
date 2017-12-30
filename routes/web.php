@@ -48,6 +48,12 @@ Route::group(['middleware' => 'auth'], function () {
         'as' => 'pengumuman'
     ]);
 
+    Route::get('monitoring/{menu}/{perhalaman}', [
+        'middleware' => 'owner',
+        'uses' => 'MonitoringController@tampil',
+        'as' => 'monitoring'
+    ]);
+
     Route::group(['prefix' => 'edit'], function () {
 
         Route::post('password', [
@@ -104,6 +110,11 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('kategori', [
             'uses' => 'KategoriController@hapus',
             'as' => 'hapus.kategori'
+        ]);
+
+        Route::post('monitoring', [
+            'uses' => 'MonitoringController@hapus',
+            'as' => 'hapus.monitoring'
         ]);
     });
 

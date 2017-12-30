@@ -26,7 +26,7 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
 $factory->define(App\Barang::class, function (Faker\Generator $faker) {
     return [
         'kategori_id' => rand(1,2),
-        'kode' => $faker->unique()->isbn10,
+        'kode' => str_random(5),
         'nama' => $faker->text(25),
         'keterangan' => $faker->text(100),
         'harga' => rand(10, 1000) * 1000,
@@ -40,5 +40,13 @@ $factory->define(App\Pengumuman::class, function (Faker\Generator $faker) {
         'judul' => $faker->text(50),
         'keterangan' => $faker->text(500),
         'tampilkan' => rand(0,1)
+    ];
+});
+
+$factory->define(App\Monitoring::class, function (Faker\Generator $faker) {
+    return [
+        'user_id' => rand(1, \App\User::count()),
+        'menu' => \App\Monitoring::MENU[rand(0, count(\App\Monitoring::MENU) - 1)],
+        'keterangan' => $faker->text
     ];
 });
