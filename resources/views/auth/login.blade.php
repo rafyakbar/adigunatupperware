@@ -30,18 +30,14 @@
                         <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}"
                                required autofocus style="padding-left: 1%">
                         @if ($errors->has('email'))
-                            <span class="help-block">
-                                <strong>{{ $errors->first('email') }}</strong>
-                            </span>
+                            <strong style="color: red">{{ $errors->first('email') }}</strong>
                         @endif
                     </div>
                     <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
                         <label for="password">Password</label>
                         <input id="password" type="password" class="form-control" name="password" required style="padding: 1%">
                         @if ($errors->has('password'))
-                            <span class="help-block">
-                                <strong>{{ $errors->first('password') }}</strong>
-                            </span>
+                            <strong style="color: red">{{ $errors->first('password') }}</strong>
                         @endif
                     </div>
                     <div class="form-group">

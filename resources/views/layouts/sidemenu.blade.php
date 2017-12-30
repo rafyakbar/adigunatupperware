@@ -13,7 +13,7 @@
         </li>
         <li @if(Route::currentRouteName() == 'barang') class="active" @endif>
             <a href="{{ route('barang', ['kategori' => 'Semua_kategori', 'perhalaman' => 10]) }}">
-                <i class="fa fa-list fa-fw"></i>
+                <i class="fa fa-bars fa-fw"></i>
                 <p>Barang</p>
             </a>
         </li>
@@ -29,6 +29,14 @@
                 <p>Daftar Pesanan</p>
             </a>
         </li>
+
+        <li @if(Route::currentRouteName() == 'kategori') class="active" @endif>
+            <a href="{{ route('kategori') }}">
+                <i class="fa fa-list-ul fa-fw"></i>
+                <p>Kategori</p>
+            </a>
+        </li>
+
         @if(\Illuminate\Support\Facades\Auth::user()->hak_akses == 'pemilik')
             <li @if(Route::currentRouteName() == 'pengumuman') class="active" @endif>
                 <a href="{{ route('pengumuman', ['perhalaman' => 10]) }}">
@@ -37,6 +45,7 @@
                 </a>
             </li>
         @endif
+
         <li @if(Route::currentRouteName() == 'profil') class="active" @endif>
             <a href="{{ route('profil') }}">
                 <i class="fa fa-gear fa-fw"></i>

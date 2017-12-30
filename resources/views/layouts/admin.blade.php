@@ -1,17 +1,17 @@
 <!doctype html>
 <html lang="en">
 <head>
-    <meta charset="utf-8" />
-    <link rel="apple-touch-icon" sizes="76x76" href="{{ asset('img/apple-icon.png') }}" />
-    <link rel="icon" type="image/png" href="{{ asset('img/favicon.png') }}" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta charset="utf-8"/>
+    <link rel="apple-touch-icon" sizes="76x76" href="{{ asset('img/apple-icon.png') }}"/>
+    <link rel="icon" type="image/png" href="{{ asset('img/favicon.png') }}"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
     <title>Adiguna Tupperware</title>
-    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
-    <meta name="viewport" content="width=device-width" />
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport'/>
+    <meta name="viewport" content="width=device-width"/>
 
-    <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet" />
+    <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet"/>
     <link href="{{ asset('css/select2.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/material-dashboard.css') }}" rel="stylesheet" />
+    <link href="{{ asset('css/material-dashboard.css') }}" rel="stylesheet"/>
     <link href="{{ asset('css/dataTables.bootstrap.css') }}" rel="stylesheet"/>
     <link href="{{ asset('css/dataTables.responsive.css') }}" rel="stylesheet"/>
     <link href="{{ asset('css/font-awesome.min.css') }}" rel="stylesheet"/>
@@ -54,7 +54,7 @@
     $().ready(function () {
         tinymce.init({
             selector: '.use-tinymce',
-            entity_encoding : "raw",
+            entity_encoding: "raw",
             height: 300,
             theme: 'modern',
             toolbar1: 'styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image',
@@ -63,53 +63,62 @@
     });
 </script>
 <script type="text/javascript">
-    $(document).ready(function() {
+    $(document).ready(function () {
         $('.datatable-barang').DataTable({
             responsive: true,
-            "paging":   false,
-            "info":     false,
-            "columnDefs" : [
-                { "orderable": false, "targets": 5}
+            "paging": false,
+            "info": false,
+            "columnDefs": [
+                {"orderable": false, "targets": 5}
             ]
         });
     });
-    $(document).ready(function() {
+    $(document).ready(function () {
         $('.datatable-daftarpesanan').DataTable({
             responsive: true,
-            "paging":   false,
-            "info":     false,
-            "columnDefs" : [
-                { "orderable": false, "targets": 2},
-                { "orderable": false, "targets": 5}
+            "paging": false,
+            "info": false,
+            "columnDefs": [
+                {"orderable": false, "targets": 2},
+                {"orderable": false, "targets": 5}
             ]
         });
     });
-    $(document).ready(function() {
+    $(document).ready(function () {
         $('.datatable-detailpesanan').DataTable({
             responsive: true,
-            "info":     false,
+            "info": false,
             "lengthMenu": [[5, 10, 20, 40, 80, 100, -1], [5, 10, 20, 40, 80, 100, "Semua barang"]],
-            "columnDefs" : [
-                { "orderable": false, "targets": 3},
-                { "orderable": false, "targets": 4},
-                { "orderable": false, "targets": 5}
+            "columnDefs": [
+                {"orderable": false, "targets": 3},
+                {"orderable": false, "targets": 4},
+                {"orderable": false, "targets": 5}
             ]
         });
     });
-    $(document).ready(function() {
+    $(document).ready(function () {
         $('.datatable-general').DataTable({
             responsive: true,
-            "info":     false,
+            "info": false,
             "lengthMenu": [[3, 5, 10, 20, 40, 80, 100, -1], [3, 5, 10, 20, 40, 80, 100, "Semua pengumuman"]],
         });
     });
-    $(document).ready(function() {
+    $(document).ready(function () {
+        $('.datatable-kategori').DataTable({
+            responsive: true,
+            "info": false,
+            "sort": false,
+            "searching": false,
+            "lengthMenu": [[5, 10, 20, 40, 80, 100, -1], [5, 10, 20, 40, 80, 100, "Semua kategori"]],
+        });
+    });
+    $(document).ready(function () {
         $('.datatable-pengumuman').DataTable({
             responsive: true,
-            "paging":   false,
-            "info":     false,
-            "columnDefs" : [
-                { "orderable": false, "targets": 4}
+            "paging": false,
+            "info": false,
+            "columnDefs": [
+                {"orderable": false, "targets": 4}
             ]
         });
     });
@@ -124,7 +133,7 @@
                 delay: 250,
                 processResults: function (data) {
                     return {
-                        results:  $.map(data, function (item) {
+                        results: $.map(data, function (item) {
                             return {
                                 text: item.kode + ' (stok : ' + item.stok + ', ' + item.nama + ')',
                                 id: item.id
@@ -136,6 +145,7 @@
             }
         });
     }
+
     autoComplete();
 </script>
 <script type="text/javascript">

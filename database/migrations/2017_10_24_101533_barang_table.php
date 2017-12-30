@@ -15,8 +15,8 @@ class BarangTable extends Migration
     {
         Schema::create('barang', function (Blueprint $table){
             $table->increments('id');
-            $table->integer('kategori_id')->unsigned();
-            $table->foreign('kategori_id')->references('id')->on('kategori')->onUpdate('CASCADE');
+            $table->integer('kategori_id')->unsigned()->nullable();
+            $table->foreign('kategori_id')->references('id')->on('kategori')->onUpdate('CASCADE')->onDelete('SET NULL');
             $table->string('kode')->unique();
             $table->string('nama')->unique();
             $table->text('keterangan')->nullable();

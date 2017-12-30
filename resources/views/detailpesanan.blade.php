@@ -52,7 +52,7 @@
                                 @foreach($pesanan->barang as $item)
                                     <tr>
                                         <td>{{ $item->nama }}</td>
-                                        <td>{{ $item->kategori()->nama }}</td>
+                                        <td>{{ (!is_null($item->kategori_id)) ? $item->kategori()->nama : '-' }}</td>
                                         <td>{{ $item->pivot->jumlah }}</td>
                                         <td>Rp {{ number_format($item->pivot->harga_sekarang, 0, ',', '.') }}</td>
                                         <td>Rp {{ number_format($item->pivot->harga_sekarang * $item->pivot->jumlah, 0, ',', '.') }}</td>

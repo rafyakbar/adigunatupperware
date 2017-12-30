@@ -136,7 +136,7 @@
                         <td class="text-center">{{ ($barang->currentpage() * $barang->perpage()) + (++$no) - $barang->perpage() }}</td>
                         <td>{{ $item->kode }}</td>
                         <td>{{ $item->nama }}</td>
-                        <td>{{ $item->kategori()->nama }}</td>
+                        <td>{{ (!is_null($item->kategori_id)) ? $item->kategori()->nama : '-' }}</td>
                         <td>{{ $item->stok }}</td>
                         <td>
                             {{--form hapus--}}
@@ -183,7 +183,9 @@
                                             <div class="form-group label-floating">
                                                 <label>Kategori</label>
                                                 <select name="kategori_id" class="form-control">
-                                                    <option value="{{ $item->kategori_id }}">{{ $item->kategori()->nama }}</option>
+                                                    @if(!is_null($item->kategori_id))
+                                                        <option value="{{ $item->kategori_id }}">{{ $item->kategori()->nama }}</option>
+                                                    @endif
                                                     @foreach(\App\Kategori::all() as $k)
                                                         <option value="{{ $k->id }}">{{ $k->nama }}</option>
                                                     @endforeach

@@ -36,7 +36,9 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('pesanan/detail/{id}', 'PesananController@tampilDetail')->name('detailpesanan');
 
-    Route::get('daftar/pesanan/{status}/{perhalaman}', 'PesananController@tampilDaftar')->name('daftarpesanan');
+    Route::get('pesanan/{status}/{perhalaman}', 'PesananController@tampilDaftar')->name('daftarpesanan');
+
+    Route::get('kategori', 'KategoriController@tampilForm')->name('kategori');
 
     Route::get('autocomplete/barang', 'BarangController@autocomplete')->name('acbarang');
 
@@ -69,6 +71,11 @@ Route::group(['middleware' => 'auth'], function () {
             'as' => 'edit.pengumuman'
         ]);
 
+        Route::post('kategori', [
+            'uses' => 'KategoriController@ubah',
+            'as' => 'edit.kategori'
+        ]);
+
     });
 
     Route::group(['prefix' => 'hapus'], function () {
@@ -88,6 +95,11 @@ Route::group(['middleware' => 'auth'], function () {
             'uses' => 'PengumumanController@hapus',
             'as' => 'hapus.pengumuman'
         ]);
+
+        Route::post('kategori', [
+            'uses' => 'KategoriController@hapus',
+            'as' => 'hapus.kategori'
+        ]);
     });
 
     Route::group(['prefix' => 'tambah'], function () {
@@ -106,6 +118,11 @@ Route::group(['middleware' => 'auth'], function () {
             'uses'=>'PengumumanController@tambah',
             'as'=>'tambah.pengumuman'
         ])->middleware('owner');
+
+        Route::post('kategori', [
+            'uses' => 'KategoriController@tambah',
+            'as' => 'tambah.kategori'
+        ]);
 
     });
 });
