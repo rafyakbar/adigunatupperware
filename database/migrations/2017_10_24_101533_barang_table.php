@@ -22,6 +22,7 @@ class BarangTable extends Migration
             $table->text('keterangan')->nullable();
             $table->bigInteger('harga')->unsigned();
             $table->integer('stok');
+            $table->boolean('dihapus');
             $table->timestamps();
         });
     }

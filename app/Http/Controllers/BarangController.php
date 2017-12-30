@@ -25,7 +25,7 @@ class BarangController extends Controller
         $jumlah = ($jumlah < 10) ? 10 : $jumlah;
         if ($request->kategori == 'Semua_kategori'){
             return view('barang', [
-                'barang' => Barang::orderBy('nama')->orderBy('updated_at', 'desc')->paginate($jumlah),
+                'barang' => Barang::where('dihapus', false)->orderBy('nama')->orderBy('updated_at', 'desc')->paginate($jumlah),
                 'kategori' => $request->kategori,
                 'no' => 0,
                 'perhalaman' => $jumlah
@@ -35,7 +35,7 @@ class BarangController extends Controller
             $kategori = str_replace('_', ' ', $request->kategori);
             if (Kategori::isAvailable($kategori)){
                 return view('barang', [
-                    'barang' => Barang::where('kategori_id', '=', Kategori::getIdByName($kategori))->orderBy('nama')->orderBy('updated_at', 'desc')->paginate($jumlah),
+                    'barang' => Barang::where('dihapus', false)->where('kategori_id', Kategori::getIdByName($kategori))->orderBy('nama')->orderBy('updated_at', 'desc')->paginate($jumlah),
                     'kategori' => $request->kategori,
                     'no' => 0,
                     'perhalaman' => $jumlah
@@ -47,7 +47,10 @@ class BarangController extends Controller
 
     public function hapus(Request $request)
     {
-        Barang::find($request->id)->delete();
+        Barang::find($request->id)->update([
+            'dihapus' => true
+        ]);
+
         return back()->with('message', 'Berhasil dihapus!');
     }
 
@@ -90,6 +93,7 @@ class BarangController extends Controller
             'harga' => $request->harga,
             'keterangan' => $request->keterangan,
             'stok' => $request->stok,
+            'dihapus' => false
         ]);
 
         return back()->with('message', 'Berhasil menambahkan '.$barang->nama.'!');

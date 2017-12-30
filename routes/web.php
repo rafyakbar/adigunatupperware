@@ -40,9 +40,9 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('autocomplete/barang', 'BarangController@autocomplete')->name('acbarang');
 
-    Route::get('pengumuman', [
+    Route::get('pengumuman/{perhalaman}', [
         'middleware' => 'owner',
-        'uses' => 'PengumumanController@tampilTambahForm',
+        'uses' => 'PengumumanController@tampilForm',
         'as' => 'pengumuman'
     ]);
 
@@ -63,6 +63,12 @@ Route::group(['middleware' => 'auth'], function () {
             'as' => 'edit.barang'
         ]);
 
+        Route::post('pengumuman', [
+            'middleware' => 'owner',
+            'uses' => 'PengumumanController@edit',
+            'as' => 'edit.pengumuman'
+        ]);
+
     });
 
     Route::group(['prefix' => 'hapus'], function () {
@@ -72,6 +78,11 @@ Route::group(['middleware' => 'auth'], function () {
             'as' => 'hapus.barang'
         ]);
 
+        Route::post('pengumuman', [
+            'middleware' => 'owner',
+            'uses' => 'PengumumanController@hapus',
+            'as' => 'hapus.pengumuman'
+        ]);
     });
 
     Route::group(['prefix' => 'tambah'], function () {

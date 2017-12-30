@@ -17,7 +17,7 @@ class PesananBarangTable extends Migration
             $table->bigInteger('pesanan_id')->unsigned();
             $table->foreign('pesanan_id')->references('id')->on('pesanan')->onUpdate('CASCADE');
             $table->integer('barang_id')->unsigned();
-            $table->foreign('barang_id')->references('id')->on('barang')->onUpdate('CASCADE');
+            $table->foreign('barang_id')->references('id')->on('barang')->onUpdate('CASCADE')->onDelete('CASCADE');
             $table->bigInteger('harga_sekarang')->unsigned();
             $table->integer('jumlah')->unsigned();
         });

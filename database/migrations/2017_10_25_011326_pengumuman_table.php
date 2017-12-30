@@ -17,6 +17,7 @@ class PengumumanTable extends Migration
             $table->increments('id');
             $table->string('judul');
             $table->text('keterangan');
+            $table->boolean('tampilkan');
             $table->timestamps();
         });
     }

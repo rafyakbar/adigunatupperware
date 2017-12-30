@@ -96,6 +96,23 @@
             ]
         });
     });
+    $(document).ready(function() {
+        $('.datatable-general').DataTable({
+            responsive: true,
+            "info":     false,
+            "lengthMenu": [[3, 5, 10, 20, 40, 80, 100, -1], [3, 5, 10, 20, 40, 80, 100, "Semua pengumuman"]],
+        });
+    });
+    $(document).ready(function() {
+        $('.datatable-pengumuman').DataTable({
+            responsive: true,
+            "paging":   false,
+            "info":     false,
+            "columnDefs" : [
+                { "orderable": false, "targets": 4}
+            ]
+        });
+    });
 </script>
 <script type="text/javascript">
     function autoComplete() {

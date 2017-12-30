@@ -16,8 +16,7 @@
                 <span class="caret"></span>
             </button>
             <ul class="dropdown-menu">
-                <li><a href="{{ route('barang', ['kategori' => 'Semua_kategori', 'perhalaman' => $perhalaman]) }}">Semua
-                        kategori</a></li>
+                <li><a href="{{ route('barang', ['kategori' => 'Semua_kategori', 'perhalaman' => $perhalaman]) }}">Semua kategori</a></li>
                 @foreach(\App\Kategori::all() as $item)
                     <li>
                         <a href="{{ route('barang', ['kategori' => str_replace(' ', '_', $item->nama), 'perhalaman' => $perhalaman]) }}">{{ $item->nama }}</a>
@@ -57,43 +56,56 @@
                     <h4 class="modal-title">Tambah barang</h4>
                 </div>
                 <div class="card-content">
-                    <div style="height: 325px;overflow: auto">
-                        <form action="{{ route('tambah.barang') }}" method="post" id="form-tambah">
-                            {{ csrf_field() }}
-                            <div class="form-group label-floating">
-                                <label>Kode</label>
-                                <input class="form-control" type="text" name="kode" required>
+                    <form action="{{ route('tambah.barang') }}" method="post" id="form-tambah">
+                        {{ csrf_field() }}
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group label-floating">
+                                    <label>Kode</label>
+                                    <input class="form-control" type="text" name="kode" required>
+                                </div>
                             </div>
-                            <div class="form-group label-floating">
-                                <label>Nama</label>
-                                <input class="form-control" type="text" name="nama" required>
+                            <div class="col-md-6">
+                                <div class="form-group label-floating">
+                                    <label>Nama</label>
+                                    <input class="form-control" type="text" name="nama" required>
+                                </div>
                             </div>
-                            <div class="form-group label-floating">
-                                <label>Kategori</label>
-                                <select name="kategori_id" class="form-control">
-                                    @foreach(\App\Kategori::all() as $k)
-                                        <option value="{{ $k->id }}">{{ $k->nama }}</option>
-                                    @endforeach
-                                </select>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group label-floating">
+                                    <label>Kategori</label>
+                                    <select name="kategori_id" class="form-control">
+                                        @foreach(\App\Kategori::all() as $k)
+                                            <option value="{{ $k->id }}">{{ $k->nama }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
                             </div>
-                            <div class="form-group label-floating">
-                                <label>Harga</label>
-                                <input class="form-control" type="number" name="harga" min="0" required>
+                            <div class="col-md-4">
+                                <div class="form-group label-floating">
+                                    <label>Harga</label>
+                                    <input class="form-control" type="number" name="harga" min="0" required>
+                                </div>
                             </div>
-                            <div class="form-group label-floating">
-                                <label>Stok</label>
-                                <input class="form-control" name="stok" type="number" min="0" required>
+                            <div class="col-md-4">
+                                <div class="form-group label-floating">
+                                    <label>Stok</label>
+                                    <input class="form-control" name="stok" type="number" min="0" required>
+                                </div>
                             </div>
-                            <div class="form-group label-floating">
-                                <label>Keterangan</label>
-                                <textarea class="form-control" name="keterangan"></textarea>
-                            </div>
-                        </form>
-                    </div>
+                        </div>
+                        <div class="form-group label-floating">
+                            <label>Keterangan</label>
+                            <textarea class="form-control" name="keterangan"></textarea>
+                        </div>
+                    </form>
                 </div>
                 <div class="card-content">
                     <div class="btn-group">
-                        <a class="btn btn-success btn-sm" onclick="event.preventDefault();document.getElementById('form-tambah').submit();">Simpan</a>
+                        <a class="btn btn-success btn-sm"
+                           onclick="event.preventDefault();document.getElementById('form-tambah').submit();">Simpan</a>
                         <a class="btn btn-danger btn-sm" data-dismiss="modal">Batal</a>
                     </div>
                 </div>
@@ -127,24 +139,25 @@
                         <td>{{ $item->kategori()->nama }}</td>
                         <td>{{ $item->stok }}</td>
                         <td>
+                            {{--form hapus--}}
+                            <form id="hapus-{{ $item->id }}" action="{{ route('hapus.barang') }}" method="post" style="display: none">
+                                {{ csrf_field() }}
+                                <input type="hidden" name="id" value="{{ $item->id }}">
+                            </form>
                             <div class="btn-group">
-                                <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#edit-{{ $item->id }}">Detail / Edit
+                                <button type="button" class="btn btn-primary btn-sm" data-toggle="modal"
+                                        data-target="#edit-{{ $item->id }}">Detail / Edit
                                 </button>
-                                <button class="btn btn-danger btn-sm" onclick="if (confirm('Apakah anda yakin ingin menghapus {{ $item->nama }}?')){ event.preventDefault();document.getElementById('hapus-{{ $item->id }}').submit();}">
+                                <button class="btn btn-danger btn-sm"
+                                        onclick="if (confirm('Apakah anda yakin ingin menghapus {{ $item->nama }}?')){ event.preventDefault();document.getElementById('hapus-{{ $item->id }}').submit();}">
                                     Hapus
                                 </button>
                             </div>
                         </td>
                     </tr>
-
-                    {{--form hapus--}}
-                    <form id="hapus-{{ $item->id }}" action="{{ route('hapus.barang') }}" method="post">
-                        {{ csrf_field() }}
-                        <input type="hidden" name="id" value="{{ $item->id }}">
-                    </form>
-
                     {{--form edit dengan modal--}}
-                    <div id="edit-{{ $item->id }}" class="modal fade" role="dialog" style="background-color: rgba(0, 0, 0, 0.5);">
+                    <div id="edit-{{ $item->id }}" class="modal fade" role="dialog"
+                         style="background-color: rgba(0, 0, 0, 0.5);">
                         <div class="modal-dialog">
                             <div class="card">
                                 <div class="card-header" data-background-color="orange">
@@ -153,16 +166,19 @@
                                 </div>
                                 <div class="card-content">
                                     <div style="height: 325px;overflow: auto">
-                                        <form action="{{ route('edit.barang') }}" method="post" id="form-edit-{{ $item->id }}">
+                                        <form action="{{ route('edit.barang') }}" method="post"
+                                              id="form-edit-{{ $item->id }}">
                                             {{ csrf_field() }}
                                             <input type="hidden" name="id" value="{{ $item->id }}">
                                             <div class="form-group label-floating">
                                                 <label>Kode</label>
-                                                <input class="form-control" type="number" value="{{ $item->kode }}" name="kode" required>
+                                                <input class="form-control" type="number" value="{{ $item->kode }}"
+                                                       name="kode" required>
                                             </div>
                                             <div class="form-group label-floating">
                                                 <label>Nama</label>
-                                                <input class="form-control" type="text" value="{{ $item->nama }}" name="nama" required>
+                                                <input class="form-control" type="text" value="{{ $item->nama }}"
+                                                       name="nama" required>
                                             </div>
                                             <div class="form-group label-floating">
                                                 <label>Kategori</label>
@@ -175,22 +191,26 @@
                                             </div>
                                             <div class="form-group label-floating">
                                                 <label>Harga</label>
-                                                <input class="form-control" type="number" value="{{ $item->harga }}" name="harga" min="0" required>
+                                                <input class="form-control" type="number" value="{{ $item->harga }}"
+                                                       name="harga" min="0" required>
                                             </div>
                                             <div class="form-group label-floating">
                                                 <label>Stok</label>
-                                                <input class="form-control" name="stok" type="number" value="{{ $item->stok }}" min="0" required>
+                                                <input class="form-control" name="stok" type="number"
+                                                       value="{{ $item->stok }}" min="0" required>
                                             </div>
                                             <div class="form-group label-floating">
                                                 <label>Keterangan</label>
-                                                <textarea class="form-control" name="keterangan">{{ (is_null($item->keterangan)) ? '-' : $item->keterangan }}</textarea>
+                                                <textarea class="form-control"
+                                                          name="keterangan">{{ (is_null($item->keterangan)) ? '-' : $item->keterangan }}</textarea>
                                             </div>
                                         </form>
                                     </div>
                                 </div>
                                 <div class="card-content">
                                     <div class="btn-group">
-                                        <a class="btn btn-success btn-sm" onclick="event.preventDefault();document.getElementById('form-edit-{{ $item->id }}').submit();">Simpan</a>
+                                        <a class="btn btn-success btn-sm"
+                                           onclick="event.preventDefault();document.getElementById('form-edit-{{ $item->id }}').submit();">Simpan</a>
                                         <a class="btn btn-danger btn-sm" data-dismiss="modal">Batal</a>
                                     </div>
                                 </div>

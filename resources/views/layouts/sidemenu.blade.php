@@ -29,5 +29,19 @@
                 <p>Daftar Pesanan</p>
             </a>
         </li>
+        @if(\Illuminate\Support\Facades\Auth::user()->hak_akses == 'pemilik')
+            <li @if(Route::currentRouteName() == 'pengumuman') class="active" @endif>
+                <a href="{{ route('pengumuman', ['perhalaman' => 10]) }}">
+                    <i class="fa fa-volume-up fa-fw"></i>
+                    <p>Pengumuman</p>
+                </a>
+            </li>
+        @endif
+        <li class="active-pro">
+            <a href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
+                <i class="fa fa-sign-out fa-fw"></i>
+                <p>Keluar</p>
+            </a>
+        </li>
     </ul>
 </div>
