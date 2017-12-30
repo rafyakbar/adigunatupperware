@@ -23,7 +23,7 @@
                 <p>Tambah Pesanan</p>
             </a>
         </li>
-        <li @if(Route::currentRouteName() == 'daftarpesanan') class="active" @endif>
+        <li @if(Route::currentRouteName() == 'daftarpesanan' || Route::currentRouteName() == 'detailpesanan') class="active" @endif>
             <a href="{{ route('daftarpesanan', ['status' => 'Semua_status', 'perhalaman' => 10]) }}">
                 <i class="fa fa-handshake-o fa-fw"></i>
                 <p>Daftar Pesanan</p>
@@ -42,6 +42,18 @@
                 <a href="{{ route('pengumuman', ['perhalaman' => 10]) }}">
                     <i class="fa fa-bullhorn fa-fw"></i>
                     <p>Pengumuman</p>
+                </a>
+            </li>
+            <li @if(Route::currentRouteName() == 'monitoring') class="active" @endif>
+                <a href="{{ route('pengumuman', ['perhalaman' => 10]) }}">
+                    <i class="fa fa-video-camera fa-fw"></i>
+                    <p>Monitoring</p>
+                </a>
+            </li>
+            <li @if(Route::currentRouteName() == 'monitoring') class="active" @endif>
+                <a href="{{ route('pengumuman', ['perhalaman' => 10]) }}">
+                    <i class="fa fa-users fa-fw"></i>
+                    <p>Pegawai</p>
                 </a>
             </li>
         @endif
