@@ -66,8 +66,9 @@
                         <td>{{ ($monitoring->currentpage() * $monitoring->perpage()) + (++$no) - $monitoring->perpage() }}</td>
                         <td>{{ $item->menu }}</td>
                         <td>
-                            Pegawai yang melakukan kegiatan ini : <b>{{ \App\User::find($item->user_id)->name }}</b><br>
+                            <p><b>Pegawai yang melakukan kegiatan ini : {{ \App\User::find($item->user_id)->name }}</b></p>
                             <p align="justify">{{ $item->keterangan }}</p>
+                            <p><b>{{ $item->created_at->diffForHumans() }}</b></p>
                         </td>
                         <td>
                             <form action="{{ route('hapus.monitoring') }}" method="post">
