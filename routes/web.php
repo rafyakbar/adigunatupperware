@@ -90,6 +90,11 @@ Route::group(['middleware' => 'auth'], function () {
             'as' => 'hapus.pesanan'
         ]);
 
+        Route::post('pesanan/barang', [
+            'uses' => 'PesananController@hapusBarang',
+            'as' => 'hapus.pesanan.barang'
+        ]);
+
         Route::post('pengumuman', [
             'middleware' => 'owner',
             'uses' => 'PengumumanController@hapus',

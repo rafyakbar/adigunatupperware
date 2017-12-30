@@ -84,4 +84,20 @@ class PesananController extends Controller
 
         return back()->with('message', 'Pesanan berhasil dibatalkan/dihapus!');
     }
+
+    public function hapusBarang(Request $request)
+    {
+        $pesanan = Pesanan::find($request->pesanan_id);
+        $barang = Barang::find($request->barang_id);
+        $jumlah = $pesanan->barang->find($barang->id)->pivot->jumlah;
+        $stokSebelum = 0;
+
+        $barang->update([
+            'stok' => ($stokSebelum = $barang->stok) + $jumlah
+        ]);
+
+        $pesanan->barang()->detach($barang);
+
+        return back()->with('message', 'Berhasil membatalkan '.$barang->nama.'! (stok sebelum : '.$stokSebelum.', stok sesudah : '.$barang->stok.')');
+    }
 }

@@ -10,6 +10,9 @@
     </div>
     <div class="card">
         <div class="card-content">
+            <div class="alert alert-warning">
+                Pesanan ini dilayani oleh <b>{{ $pesanan->user()->name }}</b>
+            </div>
             <div class="row">
                 <div class="col-md-3">
                     <div class="card">
@@ -57,8 +60,14 @@
                                         <td>Rp {{ number_format($item->pivot->harga_sekarang, 0, ',', '.') }}</td>
                                         <td>Rp {{ number_format($item->pivot->harga_sekarang * $item->pivot->jumlah, 0, ',', '.') }}</td>
                                         <td>
-                                            <button class="
-btn btn-danger btn-sm">Batalkan</button>
+                                            <form action="{{ route('hapus.pesanan.barang') }}" method="post">
+                                                {{ csrf_field() }}
+                                                <input type="hidden" name="barang_id" value="{{ $item->id }}">
+                                                <input type="hidden" name="pesanan_id" value="{{ $pesanan->id }}">
+                                                <input type="hidden" name="jumlah" value="{{ $item->pivot->jumlah }}">
+                                                <button class="
+btn btn-danger btn-sm" type="submit">Batalkan</button>
+                                            </form>
                                         </td>
                                     </tr>
                                 @endforeach
