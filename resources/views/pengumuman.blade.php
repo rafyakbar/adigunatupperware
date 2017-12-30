@@ -92,6 +92,7 @@
                 @endforeach
                 </tbody>
             </table>
+            {{ $pengumuman->links() }}
         </div>
     </div>
 
