@@ -14,7 +14,13 @@ class PengumumanController extends Controller
 
     public function tambah(Request $request)
     {
+        $this->validate($request, [
+            'judul' => 'required',
+            'keterangan' => 'required'
+        ]);
+
         Pengumuman::create([
+            'judul' => $request->judul,
             'keterangan' => $request->keterangan
         ]);
 
