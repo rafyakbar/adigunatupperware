@@ -66,8 +66,8 @@
                         <td>{{ ($monitoring->currentpage() * $monitoring->perpage()) + (++$no) - $monitoring->perpage() }}</td>
                         <td>{{ $item->menu }}</td>
                         <td>
+                            <p align="justify">{!! $item->keterangan !!}</p>
                             <p><b>Pegawai yang melakukan kegiatan ini : {{ \App\User::find($item->user_id)->name }}</b></p>
-                            <p align="justify">{{ $item->keterangan }}</p>
                             <p><b>{{ $item->created_at->diffForHumans() }}</b></p>
                         </td>
                         <td>

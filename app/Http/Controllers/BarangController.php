@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Kategori;
+use App\Monitoring;
 use foo\bar;
 use Illuminate\Http\Request;
 use App\Barang;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
 
 class BarangController extends Controller
@@ -47,8 +49,15 @@ class BarangController extends Controller
 
     public function hapus(Request $request)
     {
-        Barang::find($request->id)->update([
+        $barang = Barang::find($request->id);
+        $mtr = Auth::user()->name.' menghapus barang<br>(kode : '.$barang->kode.' | nama : '.$barang->nama.' | keterangan : '.$barang->keterangan.' | harga : Rp '.$barang->harga.' | stok : '.$barang->stok.')';
+        $barang->update([
             'dihapus' => true
+        ]);
+        Monitoring::create([
+            'user_id' => Auth::user()->id,
+            'menu' => 'barang',
+            'keterangan' => $mtr
         ]);
 
         return back()->with('message', 'Berhasil dihapus!');
@@ -64,13 +73,22 @@ class BarangController extends Controller
             'kategori_id' => 'required'
         ]);
 
-        Barang::find($request->id)->update([
+        $mtr = '';
+        $barang = Barang::find($request->id);
+        $mtr = Auth::user()->name.' mengubah barang<br>(kode : '.$barang->kode.' | nama : '.$barang->nama.' | keterangan : '.$barang->keterangan.' | harga : Rp '.$barang->harga.' | stok : '.$barang->stok.')<br>menjad<br>(kode : ';
+        $barang->update([
             'kode' => $request->kode,
             'nama' => $request->nama,
             'kategori_id' => $request->kategori_id,
             'harga' => $request->harga,
             'keterangan' => $request->keterangan,
             'stok' => $request->stok,
+        ]);
+        $mtr = $mtr.$barang->kode.' | nama : '.$barang->nama.' | keterangan : '.$barang->keterangan.' | harga : Rp '.$barang->harga.' | stok : '.$barang->stok.')';
+        Monitoring::create([
+            'user_id' => Auth::user()->id,
+            'menu' => 'barang',
+            'keterangan' => $mtr
         ]);
 
         return back()->with('message', 'Berhasil memperbarui barang!');
@@ -94,6 +112,12 @@ class BarangController extends Controller
             'keterangan' => $request->keterangan,
             'stok' => $request->stok,
             'dihapus' => false
+        ]);
+        $mtr = Auth::user()->name.' menambahkan barang<br>(kode : '.$barang->kode.' | nama : '.$barang->nama.' | keterangan : '.$barang->keterangan.' | harga : Rp '.$barang->harga.' | stok : '.$barang->stok.')';
+        Monitoring::create([
+            'user_id' => Auth::user()->id,
+            'menu' => 'barang',
+            'keterangan' => $mtr
         ]);
 
         return back()->with('message', 'Berhasil menambahkan '.$barang->nama.'!');
