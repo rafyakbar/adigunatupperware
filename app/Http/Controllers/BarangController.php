@@ -75,7 +75,7 @@ class BarangController extends Controller
 
         $mtr = '';
         $barang = Barang::find($request->id);
-        $mtr = Auth::user()->name.' mengubah barang<br>(kode : '.$barang->kode.' | nama : '.$barang->nama.' | keterangan : '.$barang->keterangan.' | harga : Rp '.$barang->harga.' | stok : '.$barang->stok.')<br>menjad<br>(kode : ';
+        $mtr = Auth::user()->name.' mengubah barang<br>(kode : '.$barang->kode.' | nama : '.$barang->nama.' | keterangan : '.$barang->keterangan.' | harga : Rp '.$barang->harga.' | stok : '.$barang->stok.')<br>menjadi<br>(kode : ';
         $barang->update([
             'kode' => $request->kode,
             'nama' => $request->nama,

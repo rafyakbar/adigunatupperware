@@ -57,6 +57,7 @@
                     <td width="8%"><i class="fa fa-arrows-v fa-fw"></i>No</td>
                     <td width="10%"><i class="fa fa-arrows-v fa-fw"></i>Menu</td>
                     <td><i class="fa fa-arrows-v fa-fw"></i>Keterangan</td>
+                    <td width="17%"><i class="fa fa-arrows-v fa-fw"></i>Tanggal & Waktu</td>
                     <td>Aksi</td>
                 </tr>
                 </thead>
@@ -70,6 +71,7 @@
                             <p><b>Pegawai yang melakukan kegiatan ini : {{ \App\User::find($item->user_id)->name }}</b></p>
                             <p><b>{{ $item->created_at->diffForHumans() }}</b></p>
                         </td>
+                        <td>{{ $item->created_at }}</td>
                         <td>
                             <form action="{{ route('hapus.monitoring') }}" method="post">
                                 {{ csrf_field() }}
