@@ -57,7 +57,7 @@ class BarangController extends Controller
     public function ubahBarang(Request $request)
     {
         $this->validate($request, [
-            'kode' => 'required|numeric',
+            'kode' => 'required',
             'nama' => 'required',
             'harga' => 'required|numeric',
             'stok' => 'required|numeric',

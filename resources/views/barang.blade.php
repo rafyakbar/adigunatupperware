@@ -172,7 +172,7 @@
                                             <input type="hidden" name="id" value="{{ $item->id }}">
                                             <div class="form-group label-floating">
                                                 <label>Kode</label>
-                                                <input class="form-control" type="number" value="{{ $item->kode }}"
+                                                <input class="form-control" type="text" value="{{ $item->kode }}"
                                                        name="kode" required>
                                             </div>
                                             <div class="form-group label-floating">
