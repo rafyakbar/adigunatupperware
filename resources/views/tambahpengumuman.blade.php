@@ -19,7 +19,7 @@
                 </div>
                 <div class="form-group">
                     <label>Isi</label>
-                    <textarea class="form-control" name="keterangan"></textarea>
+                    <textarea class="form-control use-tinymce" name="keterangan"></textarea>
                 </div>
                 <input type="submit" class="btn btn-behance">
             </form>

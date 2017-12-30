@@ -49,6 +49,19 @@
 <script src="{{ asset('js/jquery.dataTables.min.js') }}"></script>
 <script src="{{ asset('js/dataTables.bootstrap.min.js') }}"></script>
 <script src="{{ asset('js/dataTables.responsive.js') }}"></script>
+<script src="{{ asset('tinymce/tinymce.min.js') }}"></script>
+<script>
+    $().ready(function () {
+        tinymce.init({
+            selector: '.use-tinymce',
+            entity_encoding : "raw",
+            height: 300,
+            theme: 'modern',
+            toolbar1: 'styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image',
+        });
+
+    });
+</script>
 <script type="text/javascript">
     $(document).ready(function() {
         $('.datatable-barang').DataTable({

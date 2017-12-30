@@ -17,7 +17,7 @@
 </head>
 <body>
 <div class="row" style="margin-top: 7%">
-    <div class="col-md-5" style="margin: 0 auto; float: none">
+    <div class="col-md-4" style="margin: 0 auto; float: none">
         <div class="card">
             <div class="card-header" data-background-color="purple">
                 <h4 class="title">Login</h4>
