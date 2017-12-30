@@ -32,7 +32,7 @@
         @if(\Illuminate\Support\Facades\Auth::user()->hak_akses == 'pemilik')
             <li @if(Route::currentRouteName() == 'pengumuman') class="active" @endif>
                 <a href="{{ route('pengumuman', ['perhalaman' => 10]) }}">
-                    <i class="fa fa-volume-up fa-fw"></i>
+                    <i class="fa fa-bullhorn fa-fw"></i>
                     <p>Pengumuman</p>
                 </a>
             </li>

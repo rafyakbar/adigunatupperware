@@ -1,12 +1,13 @@
 @extends('layouts.admin')
 
 @section('konten')
-    {{--alert--}}
-    @if(session()->has('message'))
-        <div class="alert alert-info">
+    <div class="alert alert-info">
+        Jika anda membatalkan pesanan maka semua stok barang yang ada pada pesanan tersebut akan bertambah sesui jumlah yang dibeli.
+        @if(session()->has('message'))
+            <br>
             {!! session()->get('message') !!}
-        </div>
-    @endif
+        @endif
+    </div>
 
     <div class="btn-group">
         {{--status--}}
@@ -71,9 +72,13 @@
                         <td>{{ $item->status }}</td>
                         <td>{{ $item->created_at }}</td>
                         <td>
+                            <form id="hapus-{{ $item->id }}" action="{{ route('hapus.pesanan') }}" method="post" style="display: none">
+                                {{ csrf_field() }}
+                                <input type="hidden" name="id" value="{{ $item->id }}">
+                            </form>
                             <div class="btn-group">
                                 <a href="{{ route('detailpesanan', ['id' => $item->id]) }}" class="btn btn-info btn-sm">Detail</a>
-                                <button class="btn btn-danger btn-sm" onclick="if (confirm('Apakah anda yakin ingin menghapus {{ $item->nama }}?')){ event.preventDefault();document.getElementById('hapus-{{ $item->id }}').submit();}">
+                                <button class="btn btn-danger btn-sm" onclick="if (confirm('Apakah anda yakin ingin menghapus pesanan ini?')){ event.preventDefault();document.getElementById('hapus-{{ $item->id }}').submit();}">
                                     Hapus
                                 </button>
                             </div>

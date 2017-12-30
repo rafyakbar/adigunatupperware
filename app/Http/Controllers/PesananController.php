@@ -30,6 +30,7 @@ class PesananController extends Controller
         $jumlah = $request->perhalaman;
         $jumlah = ($jumlah < 10) ? 10 : $jumlah;
         $pesanan = ($request->status == "Semua status") ? Pesanan::orderBy('created_at', 'desc') : Pesanan::where('status', $request->status);
+
         return view('daftarpesanan', [
             'pesanan' => $pesanan->paginate($jumlah),
             'status' => $request->status,
@@ -66,6 +67,21 @@ class PesananController extends Controller
             }
             $counter++;
         }
+
         return redirect('daftar/pesanan/Semua_status/10')->with('message', rtrim($message, '<br>'));
+    }
+
+    public function hapus(Request $request)
+    {
+        $pesanan = Pesanan::find($request->id);
+        foreach ($pesanan->barang as $item){
+            $item->update([
+                'stok' => $item->stok + $item->pivot->jumlah,
+            ]);
+            $pesanan->barang()->detach($item);
+        }
+        $pesanan->delete();
+
+        return back()->with('message', 'Pesanan berhasil dibatalkan/dihapus!');
     }
 }

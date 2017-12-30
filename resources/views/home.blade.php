@@ -1,6 +1,82 @@
 @extends('layouts.admin')
 
 @section('konten')
+    <div class="row">
+        <div class="col-lg-3 col-md-6 col-sm-6">
+            <div class="card card-stats">
+                <div class="card-header" data-background-color="orange">
+                    <i class="fa fa-download fa-fw"></i>
+                </div>
+                <div class="card-content">
+                    <p class="category">Stok Terbatas</p>
+                    <h3 class="title">
+                        {{ \App\Barang::where('stok', '<', '10')->where('dihapus', false)->count() }}
+                        <small>barang</small>
+                    </h3>
+                </div>
+                <div class="card-footer">
+                    <div class="stats">
+                        <i class="fa fa-warning fa-fw"></i> Segera isi stok!
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6 col-sm-6">
+            <div class="card card-stats">
+                <div class="card-header" data-background-color="green">
+                    <i class="fa fa-cart-plus fa-fw"></i>
+                </div>
+                <div class="card-content">
+                    <p class="category">Pesanan Hari Ini</p>
+                    <h3 class="title">
+                        {{ \App\Pesanan::where('created_at', '>=', \Carbon\Carbon::today())->count() }}
+                        <small>pesanan</small>
+                    </h3>
+                </div>
+                <div class="card-footer">
+                    <div class="stats">
+                        <i class="fa fa-calendar fa-fw"></i> {{ \Carbon\Carbon::today()->toDateString() }}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6 col-sm-6">
+            <div class="card card-stats">
+                <div class="card-header" data-background-color="red">
+                    <i class="fa fa-trash fa-fw"></i>
+                </div>
+                <div class="card-content">
+                    <p class="category">Barang Dihapus</p>
+                    <h3 class="title">
+                        {{ \App\Barang::where('dihapus', true)->count() }}
+                        <small>barang</small>
+                    </h3>
+                </div>
+                <div class="card-footer">
+                    <div class="stats">
+                        <i class="fa fa-info fa-fw"></i> Dapat direcover oleh pemilik
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6 col-sm-6">
+            <div class="card card-stats">
+                <div class="card-header" data-background-color="blue">
+                    <i class="fa fa-bullhorn fa-fw"></i>
+                </div>
+                <div class="card-content">
+                    <p class="category">Pengumuman</p>
+                    <h3 class="title">{{ $jum = \App\Pengumuman::where('tampilkan', true)->count() }}</h3>
+                </div>
+                <div class="card-footer">
+                    <div class="stats">
+                        <i class="fa fa-volume-up"></i> {{ $jum }} pengumuman oleh pemilik
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="card">
         <div class="card-header" data-background-color="orange">
             <h4 class="title">Pengumuman!</h4>
