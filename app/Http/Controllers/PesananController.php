@@ -63,12 +63,12 @@ class PesananController extends Controller
                 ]);
             }
             else{
-                $message = $message."Stok ".$barang->nama." tidak mencukupi! (stok : ".$barang->stok.", permintaan : ".$request->jumlah[$counter].")<br>";
+                $message = $message."<b>Stok ".$barang->nama." tidak mencukupi! (stok : ".$barang->stok.", permintaan : ".$request->jumlah[$counter].")</b><br>";
             }
             $counter++;
         }
 
-        return redirect('daftar/pesanan/Semua_status/10')->with('message', rtrim($message, '<br>'));
+        return redirect('pesanan/detail/'.$pesanan->id)->with('message', rtrim($message, '<br>'));
     }
 
     public function hapus(Request $request)

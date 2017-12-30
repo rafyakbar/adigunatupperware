@@ -5,7 +5,7 @@
         Pada saat membatalkan salah satu barang, maka stok barang yang dibatalkan akan bertambah sesuai dengan jumlah yang dibeli.
         @if(session()->has('message'))
             <br>
-            {{ session()->get('message') }}
+            {!! session()->get('message') !!}
         @endif
     </div>
     <div class="card">
@@ -24,7 +24,10 @@
                             <label>No HP</label><br>
                             <b>{{ $pesanan->nohp_pelanggan }}</b><br>
                             <label>Alamat</label><br>
-                            <b>{{ $pesanan->alamat_pelanggan }}</b>
+                            <b>{{ $pesanan->alamat_pelanggan }}</b><br>
+                            <label>Keterangan</label><br>
+                            <b>{{ $pesanan->created_at }}</b><br>
+                            <b>({{ $pesanan->created_at->diffForHumans() }})</b>
                         </div>
                     </div>
                 </div>

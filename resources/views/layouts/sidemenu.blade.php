@@ -37,7 +37,13 @@
                 </a>
             </li>
         @endif
-        <li class="active-pro">
+        <li @if(Route::currentRouteName() == 'profil') class="active" @endif>
+            <a href="{{ route('profil') }}">
+                <i class="fa fa-gear fa-fw"></i>
+                <p>Pengaturan</p>
+            </a>
+        </li>
+        <li>
             <a href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
                 <i class="fa fa-sign-out fa-fw"></i>
                 <p>Keluar</p>

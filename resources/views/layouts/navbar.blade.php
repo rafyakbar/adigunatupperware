@@ -10,6 +10,16 @@
             <p class="navbar-brand">
                 @if(Route::currentRouteName() == 'profil')
                     Profil
+                @elseif(Route::currentRouteName() == 'home')
+                    Dashboard
+                @elseif(Route::currentRouteName() == 'pesanan')
+                    Tambah pesanan
+                @elseif(Route::currentRouteName() == 'daftarpesanan')
+                    Daftar pesanan
+                @elseif(Route::currentRouteName() == 'pengumuman')
+                    Pengumuman
+                @elseif(Route::currentRouteName() == 'detailpesanan')
+                    Pesanan yang dibeli oleh <b>{{ $pesanan->nama_pelanggan }}</b>
                 @elseif(Route::currentRouteName() == 'barang')
                     Barang
                 @endif

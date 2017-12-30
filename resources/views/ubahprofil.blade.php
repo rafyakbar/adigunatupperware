@@ -9,7 +9,7 @@
     <div class="row">
         <div class="col-md-6">
             <div class="card">
-                <div class="card-header" data-background-color="green">
+                <div class="card-header" data-background-color="blue">
                     <h4 class="title">General</h4>
                     <p class="category">Isi data berikut sesuai dengan identitas asli anda!</p>
                 </div>
