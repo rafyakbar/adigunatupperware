@@ -50,8 +50,8 @@
                     <p>Monitoring</p>
                 </a>
             </li>
-            <li @if(Route::currentRouteName() == '') class="active" @endif>
-                <a href="{{ route('pengumuman', ['perhalaman' => 10]) }}">
+            <li @if(Route::currentRouteName() == 'pegawai') class="active" @endif>
+                <a href="{{ route('pegawai', ['perhalaman' => 10]) }}">
                     <i class="fa fa-users fa-fw"></i>
                     <p>Pegawai</p>
                 </a>

@@ -15,8 +15,8 @@ class PesananTable extends Migration
     {
         Schema::create('pesanan', function (Blueprint $table){
             $table->bigIncrements('id');
-            $table->integer('user_id')->unsigned();
-            $table->foreign('user_id')->references('id')->on('users')->onUpdate('CASCADE');
+            $table->integer('user_id')->unsigned()->nullable();
+            $table->foreign('user_id')->references('id')->on('users')->onUpdate('CASCADE')->onDelete('SET NULL');
             $table->string('nama_pelanggan');
             $table->string('nohp_pelanggan');
             $table->string('email_pelanggan')->nullable();

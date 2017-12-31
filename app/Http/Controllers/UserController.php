@@ -14,6 +14,17 @@ class UserController extends Controller
         return view('ubahprofil');
     }
 
+    public function tampilPegawai(Request $request)
+    {
+        $request->perhalaman = ($request->perhalaman < 10) ? 10 : $request->perhalaman;
+
+        return view('pegawai', [
+            'pegawai' => User::where('hak_akses', 'pegawai')->orderBy('name')->paginate($request->perhalaman),
+            'no' => 0,
+            'perhalaman' => $request->perhalaman
+        ]);
+    }
+
     public function ubahProfil(Request $request)
     {
         $this->validate($request, [
@@ -54,5 +65,34 @@ class UserController extends Controller
         }
 
         return back()->with('message', 'Password berhasil diganti');
+    }
+
+    public function tambahPegawai(Request $request)
+    {
+        $this->validate($request, [
+            'name' => 'required',
+            'email' => 'required',
+            'nohp' => 'required|numeric',
+            'password' => 'required'
+        ]);
+
+        $pegawai = User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'nohp' => $request->nohp,
+            'password' => bcrypt($request->password),
+            'hak_akses' => 'pegawai'
+        ]);
+
+        return back()->with('message', 'Berhasil menambahkan '.$pegawai->name.' sebagai pegawai!');
+    }
+
+    public function hapusPegawai(Request $request)
+    {
+        $pegawai = User::find($request->id);
+        $nama = $pegawai->name;
+        $pegawai->delete();
+
+        return back()->with('message', 'Berhasil menghapus '.$nama.' dari pegawai!');
     }
 }

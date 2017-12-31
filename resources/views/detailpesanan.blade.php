@@ -11,7 +11,7 @@
     <div class="card">
         <div class="card-content">
             <div class="alert alert-warning">
-                Pesanan ini dilayani oleh <b>{{ $pesanan->user()->name }}</b>
+                Pesanan ini dilayani oleh {{ (!is_null($pesanan->user_id)) ? '<b>'.$pesanan->user()->name.'</b>' : '(pegawai yang melayani pesanan ini telah dihapus)' }}
             </div>
             <div class="row">
                 <div class="col-md-3">

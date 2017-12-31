@@ -22,6 +22,8 @@
                     Pesanan yang dibeli oleh <b>{{ $pesanan->nama_pelanggan }}</b>
                 @elseif(Route::currentRouteName() == 'barang')
                     Barang
+                @elseif(Route::currentRouteName() == 'pegawai')
+                    Pegawai
                 @endif
             </p>
         </div>

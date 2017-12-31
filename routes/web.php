@@ -15,10 +15,6 @@
 Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
 Route::post('login', 'Auth\LoginController@login');
 
-Route::get('tes', function (){
-    return view('test.table');
-})->name('tes');
-
 Route::get('/', function () {
     return redirect()->route('login');
 });
@@ -52,6 +48,12 @@ Route::group(['middleware' => 'auth'], function () {
         'middleware' => 'owner',
         'uses' => 'MonitoringController@tampil',
         'as' => 'monitoring'
+    ]);
+
+    Route::get('pegawai/{perhalaman}', [
+        'middleware' => 'owner',
+        'uses' => 'UserController@tampilPegawai',
+        'as' => 'pegawai'
     ]);
 
     Route::group(['prefix' => 'edit'], function () {
@@ -113,8 +115,15 @@ Route::group(['middleware' => 'auth'], function () {
         ]);
 
         Route::post('monitoring', [
+            'middleware' => 'owner',
             'uses' => 'MonitoringController@hapus',
             'as' => 'hapus.monitoring'
+        ]);
+
+        Route::post('pegawai', [
+            'middleware' => 'owner',
+            'uses' => 'UserController@hapusPegawai',
+            'as' => 'hapus.pegawai'
         ]);
     });
 
@@ -138,6 +147,12 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('kategori', [
             'uses' => 'KategoriController@tambah',
             'as' => 'tambah.kategori'
+        ]);
+
+        Route::post('pegawai', [
+            'middleware' => 'owner',
+            'uses' => 'UserController@tambahPegawai',
+            'as' => 'tambah.pegawai'
         ]);
 
     });

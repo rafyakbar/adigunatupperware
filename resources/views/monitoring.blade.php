@@ -68,7 +68,7 @@
                         <td>{{ $item->menu }}</td>
                         <td>
                             <p align="justify">{!! $item->keterangan !!}</p>
-                            <p><b>Pegawai yang melakukan kegiatan ini : {{ \App\User::find($item->user_id)->name }}</b></p>
+                            <p><b>Pegawai yang melakukan kegiatan ini : {{ (!is_null($nama = \App\User::find($item->user_id))) ? $nama->name : '(pegawai ini telah dihapus)' }}</b></p>
                             <p><b>{{ $item->created_at->diffForHumans() }}</b></p>
                         </td>
                         <td>{{ $item->created_at }}</td>
