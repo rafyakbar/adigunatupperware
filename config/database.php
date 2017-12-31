@@ -1,4 +1,15 @@
 <?php
+$url = parse_url("postgres://kdixdxsthzgtcs:c83a09bae65e21ac344d85bef0b8a32441f4a6806b9945e0224a63fc89e59811@ec2-23-23-220-19.compute-1.amazonaws.com:5432/d3kv8itt70peqi");
+
+$host = $url["host"];
+$username = $url["user"];
+$password = $url["pass"];
+$database = substr($url["path"], 1);
+
+//$host = '127.0.0.1';
+//$username = 'postgres';
+//$password = '10karakter';
+//$database = 'adiguna';
 
 return [
 
@@ -13,7 +24,7 @@ return [
     |
     */
 
-    'default' => env('DB_CONNECTION', 'mysql'),
+    'default' => 'pgsql',
 
     /*
     |--------------------------------------------------------------------------
@@ -56,11 +67,11 @@ return [
 
         'pgsql' => [
             'driver' => 'pgsql',
-            'host' => env('DB_HOST', '127.0.0.1'),
-            'port' => env('DB_PORT', '5432'),
-            'database' => env('DB_DATABASE', 'forge'),
-            'username' => env('DB_USERNAME', 'forge'),
-            'password' => env('DB_PASSWORD', ''),
+            'host' => $host,
+            'port' => '5432',
+            'database' => $database,
+            'username' => $username,
+            'password' => $password,
             'charset' => 'utf8',
             'prefix' => '',
             'schema' => 'public',
