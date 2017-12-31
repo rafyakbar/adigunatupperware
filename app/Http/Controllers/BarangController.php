@@ -26,8 +26,13 @@ class BarangController extends Controller
         $jumlah = $request->perhalaman;
         $jumlah = ($jumlah < 10) ? 10 : $jumlah;
         if ($request->kategori == 'Semua_kategori'){
+            $barang = null;
+            if (Auth::user()->isOwner())
+                $barang = Barang::orderBy('nama')->orderBy('updated_at', 'desc')->paginate($jumlah);
+            else
+                $barang = Barang::where('dihapus', false)->orderBy('nama')->orderBy('updated_at', 'desc')->paginate($jumlah);
             return view('barang', [
-                'barang' => Barang::where('dihapus', false)->orderBy('nama')->orderBy('updated_at', 'desc')->paginate($jumlah),
+                'barang' => $barang,
                 'kategori' => $request->kategori,
                 'no' => 0,
                 'perhalaman' => $jumlah
@@ -36,8 +41,13 @@ class BarangController extends Controller
         else{
             $kategori = str_replace('_', ' ', $request->kategori);
             if (Kategori::isAvailable($kategori)){
+                $barang = null;
+                if (Auth::user()->isOwner())
+                    $barang = Barang::where('kategori_id', Kategori::getIdByName($kategori))->orderBy('nama')->orderBy('updated_at', 'desc')->paginate($jumlah);
+                else
+                    $barang = Barang::where('dihapus', false)->where('kategori_id', Kategori::getIdByName($kategori))->orderBy('nama')->orderBy('updated_at', 'desc')->paginate($jumlah);
                 return view('barang', [
-                    'barang' => Barang::where('dihapus', false)->where('kategori_id', Kategori::getIdByName($kategori))->orderBy('nama')->orderBy('updated_at', 'desc')->paginate($jumlah),
+                    'barang' => $barang,
                     'kategori' => $request->kategori,
                     'no' => 0,
                     'perhalaman' => $jumlah
@@ -60,7 +70,23 @@ class BarangController extends Controller
             'keterangan' => $mtr
         ]);
 
-        return back()->with('message', 'Berhasil dihapus!');
+        return back()->with('message', 'Berhasil menghapus barang!');
+    }
+
+    public function recover(Request $request)
+    {
+        $barang = Barang::find($request->id);
+        $mtr = Auth::user()->name.' merecover barang<br>(kode : '.$barang->kode.' | nama : '.$barang->nama.' | keterangan : '.$barang->keterangan.' | harga : Rp '.$barang->harga.' | stok : '.$barang->stok.')';
+        $barang->update([
+            'dihapus' => false
+        ]);
+        Monitoring::create([
+            'user_id' => Auth::user()->id,
+            'menu' => 'barang',
+            'keterangan' => $mtr
+        ]);
+
+        return back()->with('message', 'Berhasil merecover barang!');
     }
 
     public function ubahBarang(Request $request)

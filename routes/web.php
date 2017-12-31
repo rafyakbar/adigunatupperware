@@ -38,6 +38,12 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('autocomplete/barang', 'BarangController@autocomplete')->name('acbarang');
 
+    Route::post('recover/barang', [
+        'middleware' => 'owner',
+        'uses' => 'BarangController@recover',
+        'as' => 'recover.barang'
+    ]);
+
     Route::get('pengumuman/{perhalaman}', [
         'middleware' => 'owner',
         'uses' => 'PengumumanController@tampilForm',

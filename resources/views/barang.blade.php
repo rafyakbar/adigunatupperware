@@ -144,14 +144,23 @@
                                 {{ csrf_field() }}
                                 <input type="hidden" name="id" value="{{ $item->id }}">
                             </form>
+                            <form id="recover-{{ $item->id }}" action="{{ route('recover.barang') }}" method="post" style="display: none">
+                                {{ csrf_field() }}
+                                <input type="hidden" name="id" value="{{ $item->id }}">
+                            </form>
                             <div class="btn-group">
-                                <button type="button" class="btn btn-primary btn-sm" data-toggle="modal"
-                                        data-target="#edit-{{ $item->id }}">Detail / Edit
+                                <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#edit-{{ $item->id }}">
+                                    Detail
                                 </button>
-                                <button class="btn btn-danger btn-sm"
-                                        onclick="if (confirm('Apakah anda yakin ingin menghapus {{ $item->nama }}?')){ event.preventDefault();document.getElementById('hapus-{{ $item->id }}').submit();}">
-                                    Hapus
-                                </button>
+                                @if(!$item->dihapus)
+                                    <button class="btn btn-danger btn-sm"
+                                            onclick="if (confirm('Apakah anda yakin ingin menghapus {{ $item->nama }}?')){ event.preventDefault();document.getElementById('hapus-{{ $item->id }}').submit();}">
+                                        Hapus
+                                    </button>
+                                @endif
+                                @if(\Illuminate\Support\Facades\Auth::user()->isOwner() && $item->dihapus)
+                                    <button class="btn btn-success btn-sm" onclick="if (confirm('Apakah anda yakin ingin merecover {{ $item->nama }}?')){ event.preventDefault();document.getElementById('recover-{{ $item->id }}').submit();}">Recover</button>
+                                @endif
                             </div>
                         </td>
                     </tr>

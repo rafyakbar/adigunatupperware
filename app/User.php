@@ -35,4 +35,9 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Pesanan')->get();
     }
+
+    public function isOwner()
+    {
+        return ($this->hak_akses == 'pemilik');
+    }
 }
