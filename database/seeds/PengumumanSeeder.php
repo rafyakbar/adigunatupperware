@@ -11,7 +11,7 @@ class PengumumanSeeder extends Seeder
      */
     public function run()
     {
-        factory(\App\Pengumuman::class, 50)->create()->each(function ($u){
+        factory(\App\Pengumuman::class, 15)->create()->each(function ($u){
             $u->make();
         });
     }
