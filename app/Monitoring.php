@@ -9,7 +9,7 @@ class Monitoring extends Model
     protected $table = 'monitoring';
 
     const MENU = [
-        'barang', 'pesanan', 'kategori'
+        'barang', 'pesanan', 'kategori', 'profil'
     ];
 
     protected $fillable = [

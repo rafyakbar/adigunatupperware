@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Barang;
+use App\Monitoring;
 use App\Pesanan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -68,12 +69,19 @@ class PesananController extends Controller
             $counter++;
         }
 
+        Monitoring::create([
+            'user_id' => Auth::user()->id,
+            'menu' => 'pesanan',
+            'keterangan' => Auth::user()->name.' melayani pesanan <b>'.$request->nama_pelanggan.'</b>'
+        ]);
+
         return redirect('pesanan/detail/'.$pesanan->id)->with('message', rtrim($message, '<br>'));
     }
 
     public function hapus(Request $request)
     {
         $pesanan = Pesanan::find($request->id);
+        $nama = $pesanan->nama_pelanggan;
         foreach ($pesanan->barang as $item){
             $item->update([
                 'stok' => $item->stok + $item->pivot->jumlah,
@@ -81,6 +89,11 @@ class PesananController extends Controller
             $pesanan->barang()->detach($item);
         }
         $pesanan->delete();
+        Monitoring::create([
+            'user_id' => Auth::user()->id,
+            'menu' => 'pesanan',
+            'keterangan' => Auth::user()->name.' menghapus pesanan yang dipesanan oleh <b>'.$nama.'</b>'
+        ]);
 
         return back()->with('message', 'Pesanan berhasil dibatalkan/dihapus!');
     }
@@ -97,6 +110,11 @@ class PesananController extends Controller
         ]);
 
         $pesanan->barang()->detach($barang);
+        Monitoring::create([
+            'user_id' => Auth::user()->id,
+            'menu' => 'pesanan',
+            'keterangan' => Auth::user()->name.' menghapus barang ('.$barang->nama.') pada pesanan yang dipesanan oleh <b>'.$pesanan->nama_pelanggan.'</b>'
+        ]);
 
         return back()->with('message', 'Berhasil membatalkan '.$barang->nama.'! (stok sebelum : '.$stokSebelum.', stok sesudah : '.$barang->stok.')');
     }
