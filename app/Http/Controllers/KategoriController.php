@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Barang;
 use App\Kategori;
+use App\Monitoring;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class KategoriController extends Controller
 {
@@ -22,8 +24,15 @@ class KategoriController extends Controller
             'nama' => 'required'
         ]);
 
-        Kategori::find($request->id)->update([
+        $kategori = Kategori::find($request->id);
+        $nama = $kategori->nama;
+        $kategori->update([
             'nama' => $request->nama
+        ]);
+        Monitoring::create([
+            'user_id' => Auth::user()->id,
+            'menu' => 'pesanan',
+            'keterangan' => Auth::user()->name . ' mengubah nama kategori "'.$nama.'" menjadi "'.$kategori->nama.'"'
         ]);
 
         return back()->with('message', 'Berhasil menghapus data!');
@@ -31,7 +40,14 @@ class KategoriController extends Controller
 
     public function hapus(Request $request)
     {
-        Kategori::find($request->id)->delete();
+        $kategori = Kategori::find($request->id);
+        $nama = $kategori->nama;
+        $kategori->delete();
+        Monitoring::create([
+            'user_id' => Auth::user()->id,
+            'menu' => 'pesanan',
+            'keterangan' => Auth::user()->name.' menghapus kategori "'.$nama.'"'
+        ]);
 
         return back()->with('message', 'Berhasil menghapus kategori!');
     }
@@ -43,13 +59,21 @@ class KategoriController extends Controller
         ]);
 
         $c = 0;
-        foreach (explode(PHP_EOL, $request->nama) as $item){
+        $nama = '';
+        foreach (explode(PHP_EOL, $request->nama) as $item) {
             Kategori::create([
                 'nama' => $item
             ]);
+            $nama = $item.', '.$nama;
             $c++;
         }
+        $nama = rtrim($nama, ', ');
+        Monitoring::create([
+            'user_id' => Auth::user()->id,
+            'menu' => 'pesanan',
+            'keterangan' => Auth::user()->name.' menambahkan kategori "'.$nama.'"'
+        ]);
 
-        return back()->with('message', 'Berhasil menambahkan '.$c.' kategori!');
+        return back()->with('message', 'Berhasil menambahkan ' . $c . ' kategori!');
     }
 }
