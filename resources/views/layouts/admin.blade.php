@@ -15,7 +15,8 @@
     <link href="{{ asset('css/dataTables.bootstrap.css') }}" rel="stylesheet"/>
     <link href="{{ asset('css/dataTables.responsive.css') }}" rel="stylesheet"/>
     <link href="{{ asset('css/font-awesome.min.css') }}" rel="stylesheet"/>
-    {{--<link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300|Material+Icons' rel='stylesheet' type='text/css'>--}}
+    <link href="{{ asset('css/bootstrap-material-datetimepicker.css') }}" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 
 <body>
@@ -42,7 +43,6 @@
 <script src="{{ asset('js/select2.min.js') }}" type="text/javascript"></script>
 <script src="{{ asset('js/bootstrap.min.js') }}" type="text/javascript"></script>
 <script src="{{ asset('js/material.min.js') }}" type="text/javascript"></script>
-<script src="{{ asset('js/arrive.min.js') }}"></script>
 <script src="{{ asset('js/perfect-scrollbar.jquery.min.js') }}"></script>
 <script src="{{ asset('js/bootstrap-notify.js') }}"></script>
 <script src="{{ asset('js/material-dashboard.js?v=1.2.0') }}"></script>
@@ -50,6 +50,19 @@
 <script src="{{ asset('js/dataTables.bootstrap.min.js') }}"></script>
 <script src="{{ asset('js/dataTables.responsive.js') }}"></script>
 <script src="{{ asset('tinymce/tinymce.min.js') }}"></script>
+<script src="{{ asset('js/moment-with-locales.js') }}"></script>
+<script src="{{ asset('js/bootstrap-material-datetimepicker.js') }}"></script>
+<script type="text/javascript">
+    $('#date-end').bootstrapMaterialDatePicker({
+        weekStart: 0, time: false
+    });
+    $('#date-end').bootstrapMaterialDatePicker('setMinDate', $('#date-start').val());
+    $('#date-start').bootstrapMaterialDatePicker({
+        weekStart: 0, time: false
+    }).on('change', function (e, date) {
+        $('#date-end').bootstrapMaterialDatePicker('setMinDate', date);
+    });
+</script>
 <script>
     $().ready(function () {
         tinymce.init({

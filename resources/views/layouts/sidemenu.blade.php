@@ -44,6 +44,12 @@
                     <p>Pengumuman</p>
                 </a>
             </li>
+            <li @if(Route::currentRouteName() == 'keuangan') class="active" @endif>
+                <a href="{{ route('keuangan', ['awal' => \Illuminate\Support\Carbon::today()->startOfMonth()->toDateString(), 'akhir' => \Illuminate\Support\Carbon::today()->toDateString()]) }}">
+                    <i class="fa fa-dollar fa-fw"></i>
+                    <p>Keuangan</p>
+                </a>
+            </li>
             <li @if(Route::currentRouteName() == 'monitoring') class="active" @endif>
                 <a href="{{ route('monitoring', ['menu' => 'Semua_menu', 'perhalaman' => 10]) }}">
                     <i class="fa fa-video-camera fa-fw"></i>

@@ -15,6 +15,14 @@ class PesananController extends Controller
         return view('tambahpesanan');
     }
 
+    public function tampilKeuangan(Request $request)
+    {
+        return view('keuangan', [
+            'awal' => $request->awal,
+            'akhir' => $request->akhir
+        ]);
+    }
+
     public function tampilDetail(Request $request)
     {
         return view('detailpesanan', [

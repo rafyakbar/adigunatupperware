@@ -38,6 +38,12 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('autocomplete/barang', 'BarangController@autocomplete')->name('acbarang');
 
+    Route::get('keuangan/{awal}/{akhir}', [
+        'middleware' => 'owner',
+        'uses' => 'PesananController@tampilKeuangan',
+        'as' => 'keuangan'
+    ]);
+
     Route::post('recover/barang', [
         'middleware' => 'owner',
         'uses' => 'BarangController@recover',

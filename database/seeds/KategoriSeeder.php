@@ -12,7 +12,7 @@ class KategoriSeeder extends Seeder
      */
 
     const KATEGORI = [
-        'Botol', 'Tempat makan', 'Lain-lain'
+        'Botol', 'Tempat makan', 'Toples', 'Lain-lain'
     ];
 
     public function run()
