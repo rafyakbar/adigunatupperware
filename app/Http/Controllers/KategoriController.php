@@ -31,7 +31,7 @@ class KategoriController extends Controller
         ]);
         Monitoring::create([
             'user_id' => Auth::user()->id,
-            'menu' => 'pesanan',
+            'menu' => 'kategori',
             'keterangan' => Auth::user()->name . ' mengubah nama kategori "'.$nama.'" menjadi "'.$kategori->nama.'"'
         ]);
 
@@ -45,7 +45,7 @@ class KategoriController extends Controller
         $kategori->delete();
         Monitoring::create([
             'user_id' => Auth::user()->id,
-            'menu' => 'pesanan',
+            'menu' => 'kategori',
             'keterangan' => Auth::user()->name.' menghapus kategori "'.$nama.'"'
         ]);
 
@@ -70,7 +70,7 @@ class KategoriController extends Controller
         $nama = rtrim($nama, ', ');
         Monitoring::create([
             'user_id' => Auth::user()->id,
-            'menu' => 'pesanan',
+            'menu' => 'kategori',
             'keterangan' => Auth::user()->name.' menambahkan kategori "'.$nama.'"'
         ]);
 

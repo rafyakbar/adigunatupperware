@@ -51,12 +51,12 @@
                         </div>
                         <div class="form-group label-floating">
                             <label>Password Baru</label>
-                            <input class="form-control" type="password" name="password_lama"
+                            <input class="form-control" type="password" name="password_baru"
                                    minlength="6" required>
                         </div>
                         <div class="form-group label-floating">
                             <label>Konfirmasi Password</label>
-                            <input class="form-control" type="password" name="password_lama"
+                            <input class="form-control" type="password" name="konfirmasi_password_baru"
                                    minlength="6" required>
                         </div>
                         <input type="submit" value="Simpan" class="btn btn-success">

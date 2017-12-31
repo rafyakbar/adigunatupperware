@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Monitoring;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -33,10 +34,18 @@ class UserController extends Controller
             'email' => 'required'
         ]);
 
+        $nama = Auth::user()->name;
+        $nohp = Auth::user()->nohp;
+        $email = Auth::user()->email;
         Auth::user()->update([
             'name' => $request->nama,
             'nohp' => $request->nohp,
             'email' => $request->email
+        ]);
+        Monitoring::create([
+            'user_id' => Auth::user()->id,
+            'menu' => 'profil',
+            'keterangan' => Auth::user()->name.' mengubah (nama : '.$nama.', nohp : '.$nohp.' dan email : '.$email.') menjadi (nama : '.Auth::user()->name.', nohp : '.Auth::user()->nohp.' dan email : '.Auth::user()->email.')'
         ]);
 
         return back()->with('message', 'Profil berhasil diganti!');
@@ -63,6 +72,11 @@ class UserController extends Controller
         else{
             return back()->with('message', 'Password lama salah!');
         }
+        Monitoring::create([
+            'user_id' => Auth::user()->id,
+            'menu' => 'profil',
+            'keterangan' => Auth::user()->name.' mengubah password (<b>'.$request->password_lama.'</b>) menjadi (<b>'.$request->password_baru.'</b>)'
+        ]);
 
         return back()->with('message', 'Password berhasil diganti');
     }
