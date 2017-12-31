@@ -29,7 +29,7 @@ $factory->define(App\Barang::class, function (Faker\Generator $faker) {
         'kode' => str_random(5),
         'nama' => $faker->text(25),
         'keterangan' => $faker->text(100),
-        'harga' => rand(10, 1000) * 1000,
+        'harga' => rand(10, 500) * 1000,
         'stok' => rand(0, 200),
         'dihapus' => false,
         'created_at' => $faker->dateTimeThisYear()

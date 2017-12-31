@@ -15,14 +15,15 @@ class PesananSeeder extends Seeder
         $users = \App\User::all();
         $barang = \App\Barang::all();
         foreach ($users as $user){
-            for ($c = 0; $c < rand(7, 10); $c++){
+            for ($c = 0; $c < 12; $c++){
                 $pesanan = \App\Pesanan::create([
                     'user_id' => $user->id,
                     'nama_pelanggan' => $faker->name,
                     'nohp_pelanggan' => '08'.$faker->isbn10,
                     'email_pelanggan' => $faker->email,
                     'alamat_pelanggan' => $faker->address,
-                    'status' => \App\Pesanan::STATUS[rand(0, count(\App\Pesanan::STATUS) - 1)]
+                    'status' => \App\Pesanan::STATUS[rand(0, count(\App\Pesanan::STATUS) - 1)],
+                    'created_at' => $faker->dateTimeThisYear()
                 ]);
                 for ($i = 0; $i < rand(5,10); $i++){
                     $barang = \App\Barang::find(rand(1,100));

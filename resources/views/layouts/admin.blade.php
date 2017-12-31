@@ -108,6 +108,16 @@
         });
     });
     $(document).ready(function () {
+        $('.datatable-keuangan').DataTable({
+            responsive: true,
+            "lengthMenu": [[5, 10, 20, 40, 80, 100, -1], [5, 10, 20, 40, 80, 100, "Semua pesanan"]],
+            "columnDefs": [
+                {"orderable": false, "targets": 2},
+                {"orderable": false, "targets": 5}
+            ]
+        });
+    });
+    $(document).ready(function () {
         $('.datatable-detailpesanan').DataTable({
             responsive: true,
             "info": false,
@@ -123,7 +133,7 @@
         $('.datatable-general').DataTable({
             responsive: true,
             "info": false,
-            "lengthMenu": [[3, 5, 10, 20, 40, 80, 100, -1], [3, 5, 10, 20, 40, 80, 100, "Semua pengumuman"]],
+            "lengthMenu": [[5, 10, 20, 40, 80, 100, -1], [5, 10, 20, 40, 80, 100, "Semua data"]],
         });
     });
     $(document).ready(function () {

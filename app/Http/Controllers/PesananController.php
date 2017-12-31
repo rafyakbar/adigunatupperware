@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Barang;
 use App\Monitoring;
 use App\Pesanan;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -17,9 +18,30 @@ class PesananController extends Controller
 
     public function tampilKeuangan(Request $request)
     {
+        try{
+            Carbon::parse($request->akhir);
+            Carbon::parse($request->awal);
+        }
+        catch (\Exception $exception){
+            return redirect()->route('keuangan', ['awal' => \Illuminate\Support\Carbon::today()->startOfMonth()->toDateString(), 'akhir' => \Illuminate\Support\Carbon::today()->toDateString()]);
+        }
+
+        $pesanan = Pesanan::where('created_at', '>=', $request->awal)->where('created_at', '<=', $request->akhir)->orderBy('created_at', 'desc')->get();
+        $lunas = 0;
+        $belumlunas = 0;
+        foreach ($pesanan as $item){
+            $pembayaran = Pesanan::totalPembayaran($item);
+            $lunas = ($item->status == 'Lunas') ? ($lunas + $pembayaran) : $lunas;
+            $belumlunas = ($item->status == 'Belum lunas') ? ($belumlunas + $pembayaran) : $belumlunas;
+        }
+
         return view('keuangan', [
             'awal' => $request->awal,
-            'akhir' => $request->akhir
+            'akhir' => $request->akhir,
+            'pesanan' => $pesanan,
+            'no' => 0,
+            'lunas' => $lunas,
+            'belumlunas' => $belumlunas,
         ]);
     }
 
@@ -38,7 +60,7 @@ class PesananController extends Controller
         }
         $jumlah = $request->perhalaman;
         $jumlah = ($jumlah < 10) ? 10 : $jumlah;
-        $pesanan = ($request->status == "Semua status") ? Pesanan::orderBy('created_at', 'desc') : Pesanan::where('status', $request->status);
+        $pesanan = ($request->status == "Semua status") ? Pesanan::orderBy('created_at', 'desc') : Pesanan::where('status', $request->status)->orderBy('created_at', 'desc');
 
         return view('daftarpesanan', [
             'pesanan' => $pesanan->paginate($jumlah),
