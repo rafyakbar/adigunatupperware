@@ -31,7 +31,8 @@ $factory->define(App\Barang::class, function (Faker\Generator $faker) {
         'keterangan' => $faker->text(100),
         'harga' => rand(10, 1000) * 1000,
         'stok' => rand(0, 200),
-        'dihapus' => false
+        'dihapus' => false,
+        'created_at' => $faker->dateTimeThisYear()
     ];
 });
 
