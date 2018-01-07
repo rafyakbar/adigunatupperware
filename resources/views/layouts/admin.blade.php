@@ -17,6 +17,16 @@
     <link href="{{ asset('css/font-awesome.min.css') }}" rel="stylesheet"/>
     <link href="{{ asset('css/bootstrap-material-datetimepicker.css') }}" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+        .table tr {
+            cursor: pointer;
+        }
+        .hiddenRow {
+            padding: 0 4px !important;
+            /*background-color: #eeeeee;*/
+            /*font-size: 13px;*/
+        }
+    </style>
 </head>
 
 <body>
