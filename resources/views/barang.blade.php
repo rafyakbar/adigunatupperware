@@ -178,13 +178,12 @@
                                     <div class="col-md-4">
                                         <div class="card">
                                             <div class="card-content">
-                                                <form method="post">
+                                                <form action="{{ route('tambah.barang.stok') }}" method="post">
                                                     {{ csrf_field() }}
                                                     <input type="hidden" name="id" value="{{ $item->id }}">
                                                     <div class="form-group label-floating">
                                                         <label>Tambahkan stok</label>
-                                                        <input class="form-control" name="stok" type="number"
-                                                               value="{{ $item->stok }}" min="0" required>
+                                                        <input class="form-control" name="jumlah" type="number" min="1" required>
                                                     </div>
                                                     <input type="submit" value="Tambah stok" class="btn btn-success btn-sm">
                                                 </form>

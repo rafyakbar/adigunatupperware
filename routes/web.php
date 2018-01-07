@@ -146,6 +146,11 @@ Route::group(['middleware' => 'auth'], function () {
             'as' => 'tambah.barang'
         ]);
 
+        Route::post('barang/stok', [
+            'uses' => 'BarangController@tambahStok',
+            'as' => 'tambah.barang.stok'
+        ]);
+
         Route::post('pesanan', [
             'uses' => 'PesananController@tambah',
             'as' => 'tambah.pesanan'

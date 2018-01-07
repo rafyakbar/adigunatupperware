@@ -44,7 +44,7 @@
                                 <h4 class="title">Barang</h4>
                                 <p class="category">Tambahkan barang yang akan dibeli!</p>
                             </div>
-                            <div class="card-content">
+                            <div class="card-content table-responsive">
                                 <div class="row">
                                     <div class="col-md-4">
                                         <button type="button" onclick="tambah()" class="btn btn-primary">Tambah barang

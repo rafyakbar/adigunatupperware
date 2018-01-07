@@ -18,13 +18,8 @@
     <link href="{{ asset('css/bootstrap-material-datetimepicker.css') }}" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <style>
-        .table tr {
-            cursor: pointer;
-        }
         .hiddenRow {
             padding: 0 4px !important;
-            /*background-color: #eeeeee;*/
-            /*font-size: 13px;*/
         }
     </style>
 </head>
@@ -152,7 +147,7 @@
             "info": false,
             "sort": false,
             "searching": false,
-            "lengthMenu": [[5, 10, 20, 40, 80, 100, -1], [5, 10, 20, 40, 80, 100, "Semua kategori"]],
+            "lengthMenu": [[5, 10, 20, 40, 80, 100, -1], [5, 10, 20, 40, 80, 100, "Semua data"]],
         });
     });
     $(document).ready(function () {

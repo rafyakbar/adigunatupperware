@@ -148,4 +148,23 @@ class BarangController extends Controller
 
         return back()->with('message', 'Berhasil menambahkan '.$barang->nama.'!');
     }
+
+    public function tambahStok(Request $request)
+    {
+        $this->validate($request, [
+            'jumlah' => 'required|numeric'
+        ]);
+
+        $barang = Barang::find($request->id);
+        $barang->update([
+            'stok' => $barang->stok + $request->jumlah
+        ]);
+        Monitoring::create([
+            'user_id' => Auth::user()->id,
+            'menu' => 'barang',
+            'keterangan' => Auth::user()->name.' menambah stok '.$barang->nama.' sebanyak '.$request->jumlah
+        ]);
+
+        return back()->with('message', 'Berhasil menambahkan stok '.$barang->nama.' sebanyak '.$request->jumlah);
+    }
 }
