@@ -153,7 +153,7 @@
                             </form>
                             <div class="btn-group">
                                 <button type="button" class="btn btn-primary btn-sm accordion-toggle"
-                                        data-toggle="collapse" data-target="#detail-{{ $item->id }}">
+                                        data-toggle="modal" data-target="#detail-{{ $item->id }}">
                                     Detail
                                 </button>
                                 @if(!$item->dihapus)
@@ -171,93 +171,102 @@
                             </div>
                         </td>
                     </tr>
-                    <tr>
-                        <td colspan="6" class="hiddenRow">
-                            <div class="accordian-body collapse" id="detail-{{ $item->id }}">
-                                <div class="card">
-                                    <div class="col-md-4">
-                                        <div class="card">
-                                            <div class="card-content">
-                                                <form action="{{ route('tambah.barang.stok') }}" method="post">
-                                                    {{ csrf_field() }}
-                                                    <input type="hidden" name="id" value="{{ $item->id }}">
-                                                    <div class="form-group label-floating">
-                                                        <label>Tambahkan stok</label>
-                                                        <input class="form-control" name="jumlah" type="number" min="1" required>
-                                                    </div>
-                                                    <input type="submit" value="Tambah stok" class="btn btn-success btn-sm">
-                                                </form>
+                    <div class="modal fade" id="detail-{{ $item->id }}">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-body">
+                                <div class="modal-body">
+                                    <div class="row">
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="card">
+                                                <div class="card-content">
+                                                    <form action="{{ route('tambah.barang.stok') }}" method="post">
+                                                        {{ csrf_field() }}
+                                                        <input type="hidden" name="id" value="{{ $item->id }}">
+                                                        <div class="form-group label-floating">
+                                                            <label>Tambahkan stok</label>
+                                                            <input class="form-control" name="jumlah" type="number"
+                                                                   min="1" required>
+                                                        </div>
+                                                        <input type="submit" value="Tambah stok"
+                                                               class="btn btn-success btn-sm">
+                                                    </form>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="col-md-8">
-                                        <div class="card">
-                                            <div class="card-content">
-                                                <form action="{{ route('edit.barang') }}" method="post">
-                                                    {{ csrf_field() }}
-                                                    <input type="hidden" name="id" value="{{ $item->id }}">
-                                                    <div class="row">
-                                                        <div class="col-md-4">
-                                                            <div class="form-group label-floating">
-                                                                <label>Kode</label>
-                                                                <input class="form-control" type="text"
-                                                                       value="{{ $item->kode }}"
-                                                                       name="kode" required>
+                                        <div class="col-md-8">
+                                            <div class="card">
+                                                <div class="card-content">
+                                                    <form action="{{ route('edit.barang') }}" method="post">
+                                                        {{ csrf_field() }}
+                                                        <input type="hidden" name="id" value="{{ $item->id }}">
+                                                        <div class="row">
+                                                            <div class="col-md-4">
+                                                                <div class="form-group label-floating">
+                                                                    <label>Kode</label>
+                                                                    <input class="form-control" type="text"
+                                                                           value="{{ $item->kode }}"
+                                                                           name="kode" required>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-8">
+                                                                <div class="form-group label-floating">
+                                                                    <label>Nama</label>
+                                                                    <input class="form-control" type="text"
+                                                                           value="{{ $item->nama }}"
+                                                                           name="nama" required>
+                                                                </div>
                                                             </div>
                                                         </div>
-                                                        <div class="col-md-8">
-                                                            <div class="form-group label-floating">
-                                                                <label>Nama</label>
-                                                                <input class="form-control" type="text"
-                                                                       value="{{ $item->nama }}"
-                                                                       name="nama" required>
+                                                        <div class="row">
+                                                            <div class="col-md-5">
+                                                                <div class="form-group label-floating">
+                                                                    <label>Kategori</label>
+                                                                    <select name="kategori_id" class="form-control">
+                                                                        @if(!is_null($item->kategori_id))
+                                                                            <option value="{{ $item->kategori_id }}">{{ $item->kategori()->nama }}</option>
+                                                                        @endif
+                                                                        @foreach(\App\Kategori::all() as $k)
+                                                                            <option value="{{ $k->id }}">{{ $k->nama }}</option>
+                                                                        @endforeach
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <div class="form-group label-floating">
+                                                                    <label>Harga</label>
+                                                                    <input class="form-control" type="number"
+                                                                           value="{{ $item->harga }}"
+                                                                           name="harga" min="0" required>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-3">
+                                                                <div class="form-group label-floating">
+                                                                    <label>Stok</label>
+                                                                    <input class="form-control" name="stok"
+                                                                           type="number"
+                                                                           value="{{ $item->stok }}" min="0" required>
+                                                                </div>
                                                             </div>
                                                         </div>
-                                                    </div>
-                                                    <div class="row">
-                                                        <div class="col-md-5">
-                                                            <div class="form-group label-floating">
-                                                                <label>Kategori</label>
-                                                                <select name="kategori_id" class="form-control">
-                                                                    @if(!is_null($item->kategori_id))
-                                                                        <option value="{{ $item->kategori_id }}">{{ $item->kategori()->nama }}</option>
-                                                                    @endif
-                                                                    @foreach(\App\Kategori::all() as $k)
-                                                                        <option value="{{ $k->id }}">{{ $k->nama }}</option>
-                                                                    @endforeach
-                                                                </select>
-                                                            </div>
+                                                        <div class="form-group label-floating">
+                                                            <label>Keterangan</label>
+                                                            <textarea class="form-control"
+                                                                      name="keterangan">{{ (is_null($item->keterangan)) ? '-' : $item->keterangan }}</textarea>
                                                         </div>
-                                                        <div class="col-md-4">
-                                                            <div class="form-group label-floating">
-                                                                <label>Harga</label>
-                                                                <input class="form-control" type="number"
-                                                                       value="{{ $item->harga }}"
-                                                                       name="harga" min="0" required>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-md-3">
-                                                            <div class="form-group label-floating">
-                                                                <label>Stok</label>
-                                                                <input class="form-control" name="stok" type="number"
-                                                                       value="{{ $item->stok }}" min="0" required>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group label-floating">
-                                                        <label>Keterangan</label>
-                                                        <textarea class="form-control"
-                                                                  name="keterangan">{{ (is_null($item->keterangan)) ? '-' : $item->keterangan }}</textarea>
-                                                    </div>
-                                                    <input type="submit" value="Simpan" class="btn btn-success btn-sm">
-                                                </form>
+                                                        <input type="submit" value="Simpan"
+                                                               class="btn btn-success btn-sm">
+                                                    </form>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </td>
-                    </tr>
+                        </div>
+                    </div>
                 @endforeach
                 </tbody>
             </table>

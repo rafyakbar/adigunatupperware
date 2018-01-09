@@ -13,7 +13,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //set lokasi global carbon
+        //set lokasi global carbon dan max_execution_time
+        ini_set('max_execution_time', 180);
         \Carbon\Carbon::setlocale('id');
     }
 
